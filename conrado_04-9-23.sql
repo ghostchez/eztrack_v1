@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dumping database structure for eztrack
-CREATE DATABASE IF NOT EXISTS `eztrack` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `eztrack`;
+-- Dumping database structure for eztrack_db
+CREATE DATABASE IF NOT EXISTS `eztrack_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `eztrack_db`;
 
--- Dumping structure for table eztrack.eventos
+-- Dumping structure for table eztrack_db.eventos
 DROP TABLE IF EXISTS `eventos`;
 CREATE TABLE IF NOT EXISTS `eventos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -32,11 +32,11 @@ CREATE TABLE IF NOT EXISTS `eventos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.eventos: ~1 rows (approximately)
+-- Dumping data for table eztrack_db.eventos: ~1 rows (approximately)
 REPLACE INTO `eventos` (`id`, `nombre`, `fecha`, `ciudad`, `nombre_evento`, `nombre_autodromo`, `url_ubicacion`) VALUES
 	(1, 'redbull', '2023-09-03', 'palermo', 'epic winter', 'C1', 'www.url.com');
 
--- Dumping structure for table eztrack.eventos_lista
+-- Dumping structure for table eztrack_db.eventos_lista
 DROP TABLE IF EXISTS `eventos_lista`;
 CREATE TABLE IF NOT EXISTS `eventos_lista` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -49,9 +49,9 @@ CREATE TABLE IF NOT EXISTS `eventos_lista` (
   CONSTRAINT `FK_eventos_lista_vehiculos` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.eventos_lista: ~0 rows (approximately)
+-- Dumping data for table eztrack_db.eventos_lista: ~0 rows (approximately)
 
--- Dumping structure for table eztrack.metodo_pago
+-- Dumping structure for table eztrack_db.metodo_pago
 DROP TABLE IF EXISTS `metodo_pago`;
 CREATE TABLE IF NOT EXISTS `metodo_pago` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -59,9 +59,9 @@ CREATE TABLE IF NOT EXISTS `metodo_pago` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.metodo_pago: ~0 rows (approximately)
+-- Dumping data for table eztrack_db.metodo_pago: ~0 rows (approximately)
 
--- Dumping structure for table eztrack.opcion_alquileres
+-- Dumping structure for table eztrack_db.opcion_alquileres
 DROP TABLE IF EXISTS `opcion_alquileres`;
 CREATE TABLE IF NOT EXISTS `opcion_alquileres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `opcion_alquileres` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.opcion_alquileres: ~5 rows (approximately)
+-- Dumping data for table eztrack_db.opcion_alquileres: ~5 rows (approximately)
 REPLACE INTO `opcion_alquileres` (`id`, `cantidadVueltas`, `naftaIncluida`, `instructorABordo`, `analisisTelemetria`, `seguroPremium`, `compuestoNeumaticos`) VALUES
 	(1, 4, 0, 0, 0, 0, 'blando'),
 	(2, 3, 1, 0, 0, 0, 'blando'),
@@ -82,7 +82,7 @@ REPLACE INTO `opcion_alquileres` (`id`, `cantidadVueltas`, `naftaIncluida`, `ins
 	(4, 2, 1, 0, 0, 0, 'blando'),
 	(5, 3, 1, 1, 1, 0, 'blando');
 
--- Dumping structure for table eztrack.pagos
+-- Dumping structure for table eztrack_db.pagos
 DROP TABLE IF EXISTS `pagos`;
 CREATE TABLE IF NOT EXISTS `pagos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -96,9 +96,9 @@ CREATE TABLE IF NOT EXISTS `pagos` (
   CONSTRAINT `FK_pagos_reservas` FOREIGN KEY (`idReserva`) REFERENCES `reservas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.pagos: ~0 rows (approximately)
+-- Dumping data for table eztrack_db.pagos: ~0 rows (approximately)
 
--- Dumping structure for table eztrack.reservas
+-- Dumping structure for table eztrack_db.reservas
 DROP TABLE IF EXISTS `reservas`;
 CREATE TABLE IF NOT EXISTS `reservas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -123,12 +123,12 @@ CREATE TABLE IF NOT EXISTS `reservas` (
   CONSTRAINT `FK_reservas_vehiculos` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.reservas: ~2 rows (approximately)
+-- Dumping data for table eztrack_db.reservas: ~2 rows (approximately)
 REPLACE INTO `reservas` (`id`, `idUsuario`, `idVehiculo`, `idEvento`, `idOpcionAlquiler`, `subtotal`, `idPago`, `fecha`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
 	(11, NULL, 1, 1, 2, NULL, NULL, '0000-00-00 00:00:00', '2023-09-04 04:45:44', '2023-09-04 04:45:51', NULL),
 	(12, NULL, 1, 1, 5, NULL, NULL, '0000-00-00 00:00:00', '2023-09-04 04:46:41', '2023-09-04 04:47:55', NULL);
 
--- Dumping structure for table eztrack.usuarios
+-- Dumping structure for table eztrack_db.usuarios
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -143,11 +143,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.usuarios: ~2 rows (approximately)
+-- Dumping data for table eztrack_db.usuarios: ~2 rows (approximately)
 REPLACE INTO `usuarios` (`id`, `nombre`, `email`, `telefono`, `identidadVerificada`, `password`, `createdAt`, `deletedAt`, `updatedAt`) VALUES
 	(1, 'conrado', 'conrado@gmail.com', 2147483647, NULL, '123asd', NULL, NULL, NULL);
 
--- Dumping structure for table eztrack.vehiculos
+-- Dumping structure for table eztrack_db.vehiculos
 DROP TABLE IF EXISTS `vehiculos`;
 CREATE TABLE IF NOT EXISTS `vehiculos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `vehiculos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table eztrack.vehiculos: ~2 rows (approximately)
+-- Dumping data for table eztrack_db.vehiculos: ~2 rows (approximately)
 REPLACE INTO `vehiculos` (`id`, `modelo`, `marca`, `año`, `peso`, `potencia`, `disponibilidad`, `createdAt`, `deletedAt`, `updatedAt`) VALUES
 	(1, 'P3', 'Tesla', 2022, 1500, 200, 0, '2023-09-03 23:52:45', NULL, '2023-09-03 23:52:45'),
 	(2, 'J10', 'Renault', 2023, 1600, 1000, 0, '2023-09-03 23:57:39', NULL, '2023-09-03 23:57:39');
