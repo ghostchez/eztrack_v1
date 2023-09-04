@@ -1,0 +1,55 @@
+<%- include("./partials/head") %>
+
+<body>
+    <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <!-- Menu -->
+      <%- include("./partials/header") %>
+      <!-- / Menu -->
+
+    <!-- Layout container -->
+    <div class="layout-page">
+
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Vehiculos</h4>
+
+          <div class="row">
+            <div class="col-md-10">
+              <h4 class="fw-bold py-3 mb-4"> Lista vehiculos</h4>
+              <!-- Basic Bootstrap Table -->
+              <% if (vehiculos_lista.length > 0) { %>
+                <% vehiculos_lista.forEach(v => { %>
+                  <div class="card mb-4 py-3">
+                  <div class="row">    
+                      <div class="col-md-4">
+                      <img style="width: 60%;" class="d-block mx-auto" src="/assets/img/img1.png" alt="">
+                    </div>
+                    <div class="col-md-8">
+                      <p class="fs-3 fw-bold"><%- v.marca %> <%- v.modelo %></p>
+                      <p >Potencia <i class="fa-solid fa-gauge fa-lg"></i> <%- v.potencia %> <span class="ms-3">Año</span> <i class="fa-solid fa-calendar-days fa-lg"></i> <%- v.año %></p>
+                      <p >Peso <i class="fa-solid fa-weight-hanging fa-lg"></i> <%- v.peso %></p>
+                      <hr>
+                      <div class="row px-3">
+                        <div class="col-md-9">
+                          <p class="text-end">Precio desde 10 us$</p>
+                        </div>
+                        <div class="col-3">
+                          <a href="/vehiculos/alquiler/<%- v.id %>" class="btn btn-warning w-100">Alquilar</a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+              <% }else{ %>
+                <p class="text-muted text-center fs-4 mb-5 mt-2 py-2 bg-light rounded-5">Ningun vehiculo encontrado</p>
+              <% } %>
+            <!-- / Content -->
+<%- include("./partials/footer") %>
+

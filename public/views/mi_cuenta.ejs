@@ -1,0 +1,101 @@
+<%- include("./partials/head") %>
+
+<body>
+    <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <!-- Menu -->
+      <%- include("./partials/header") %>
+      <!-- / Menu -->
+
+    <!-- Layout container -->
+    <div class="layout-page">
+
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Usuarios</h4>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card mb-4">
+                <h5 class="card-header">Mi cuenta</h5>
+                <!-- Account -->
+                <hr class="my-0" />
+                <div class="card-body">
+                  <form id="formAccountSettings" method="POST" onsubmit="return false">
+                    <div class="row">
+                      <div class="mb-3 col-md-6">
+                        <label for="firstName" class="form-label">Nombre</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          id="firstName"
+                          name="firstName"
+                          value=""
+                          autofocus
+                        />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="lastName" class="form-label">Apellido</label>
+                        <input class="form-control" type="text" name="lastName" id="lastName" value="" />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="password" class="form-label">Password</label>
+                        <input
+                          class="form-control"
+                          type="password"
+                          id="password"
+                          name="password"
+                          value=""
+                          placeholder=""
+                        />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="password2" class="form-label">Repetir Password</label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="password2"
+                          name="password2"
+                          value=""
+                        />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="email">Email</label>
+                        <div class="input-group input-group-merge">
+                          <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="ejemplo@gmail.com"
+                          />
+                        </div>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="phoneNumber">Telefono</label>
+                        <div class="input-group input-group-merge">
+                          <input
+                            type="number"
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            class="form-control"
+                            placeholder=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <button type="submit" class="btn btn-primary me-2">Guardar</button>
+                      <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- /Account -->
+              </div>
+            <!-- / Content -->
+
+<%- include("./partials/footer") %>
