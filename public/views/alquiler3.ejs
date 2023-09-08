@@ -1,12 +1,12 @@
 <%- include("./partials/head") %>
 
+
 <body>
     <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
       <!-- Menu -->
-<%- include("./partials/header") %>
-
+      <%- include("./partials/header") %>
       <!-- / Menu -->
 
     <!-- Layout container -->
@@ -17,10 +17,10 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Alquiler</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Alquiler paso 3</h4>
 
           <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
               <div class="card mb-4">
                 <div class="d-flex align-items-center">
                     <a class="card-header" href="alquiler.html">Eleccion de vehiculo</a> 
@@ -33,113 +33,58 @@
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" method="POST" onsubmit="return false">
-                    <div class="row px-3">
-                      <div class="mb-3 col-md-12">
-                        <label class="form-label mb-3">Metodo de pago</label>
-                        <div class="d-flex">
-                          <div class="form-check">
-                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio1">
-                            <label class="form-check-label" for="defaultRadio1"> Tarjeta de credito </label>
-                          </div>
-                          <div class="form-check ms-3">
-                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio2">
-                            <label class="form-check-label" for="defaultRadio2"> Transferencia bancaria </label>
-                          </div>
-                          <div class="form-check ms-3">
-                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio3">
-                            <label class="form-check-label" for="defaultRadio3"> Paypal </label>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      
-                      <div class="mb-3 col-md-12">
-                        <label for="email" class="form-label">Email</label>
-                        <input
-                          class="form-control"
-                          type="email"
-                          id="email"
-                          name="email"
-                          value=""
-                          autofocus
-                        />
-                      </div>
-                      <div class="mb-3 col-md-12">
-                        <label for="address" class="form-label">Direccion</label>
+                  <form id="formAccountSettings" method="POST" action="/vehiculos/alquiler_paso3">
+                    <input type="hidden" name="idReserva" value="<%- id %>">
+                    <div class="row">
+                      <div class="mb-3 col-md-6">
+                        <label for="cantidadVueltas" class="form-label">Cantidad de vueltas</label>
                         <input
                           class="form-control"
                           type="text"
-                          id="address"
-                          name="address"
+                          id="cantidadVueltas"
+                          name="cantidadVueltas"
                           value=""
                           autofocus
                         />
                       </div>
-                      <hr class="my-3">
-                      <div class="mb-3 col-md-12">
-                        <label for="cardOwner" class="form-label">Titular</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          id="cardOwner"
-                          name="cardOwner"
-                          value=""
-                          autofocus
-                        />
+                      <div class="mb-3 col-md-6">
+                        <label for="naftaIncluida" class="form-label">Nafta incluida</label>
+                        <select class="form-select" name="naftaIncluida" id="naftaIncluida" aria-label="Default select example">
+                          <option selected>Seleccionar..</option>
+                          <option value="1">Si</option>
+                          <option value="0">No</option>
+                        </select>
                       </div>
-                      <div class="mb-3 col-md-12">
-                        <label for="cardNumber" class="form-label">Numero de la tarjeta</label>
-                        <input
-                          class="form-control"
-                          type="number"
-                          id="cardNumber"
-                          name="cardNumber"
-                          value=""
-                          autofocus
-                        />
-                      </div>
-                      <div class="mb-3 pt-2 col-md-8">
-                        <label>Fecha de expiracion</label>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <input
-                              class="form-control"
-                              type="number"
-                              id="month"
-                              name="month"
-                              value=""
-                              placeholder="mes"
-                              autofocus
-                            />
-                          </div>
-                          <div class="col-md-6">
-                            <input
-                              class="form-control"
-                              type="number"
-                              id="year"
-                              name="year"
-                              value=""
-                              placeholder="año"
-                              autofocus
-                            />
-                          </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label">Paquete de servicios adicionales</label>
+                        <div class="form-check mt-3 ms-3">
+                          <input class="form-check-input" type="checkbox" value="1" name="instructorABordo" id="instructorABordo">
+                          <label class="form-check-label" for="instructorABordo"> instructor a bordo </label>
+                        </div>
+                        <div class="form-check ms-3">
+                          <input class="form-check-input" type="checkbox" value="1" name="analisisTelemetria"id="analisisTelemetria">
+                          <label class="form-check-label" for="analisisTelemetria"> análisis de telemetría </label>
+                        </div>
+                        <div class="form-check ms-3">
+                          <input class="form-check-input" type="checkbox" value="1" name="seguroMedico" id="seguroMedico">
+                          <label class="form-check-label" for="seguroMedico"> Seguro premium </label>
                         </div>
                       </div>
-                      <div class="mb-3 col-md-4 ">
-                        <label for="cvv" class="form-label">CVV</label>
-                        <input
-                          class="form-control"
-                          type="number"
-                          id="cvv"
-                          name="cvv"
-                          value=""
-                          placeholder="123"
-                          autofocus
-                        />
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label">Personalizar compuesto de neumáticos </label>
+                        <div class="form-check mt-3 ms-3">
+                          <input name="compuestoNeumaticos" class="form-check-input" type="radio" value="blando" id="blando">
+                          <label class="form-check-label" for="blando"> blando </label>
+                        </div>
+                        <div class="form-check ms-3">
+                          <input name="compuestoNeumaticos" class="form-check-input" type="radio" value="medio" id="medio">
+                          <label class="form-check-label" for="medio"> medio </label>
+                        </div>
+                        <div class="form-check ms-3">
+                          <input name="compuestoNeumaticos" class="form-check-input" type="radio" value="duro" id="duro">
+                          <label class="form-check-label" for="duro"> duro </label>
+                        </div>
                       </div>
-
-                      
                     <div class="mt-2">
                       <button type="submit" class="btn btn-primary me-2">Continuar</button>
                       <button type="reset" class="btn btn-outline-secondary">Cancel</button>

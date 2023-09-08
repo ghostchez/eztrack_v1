@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-<%- include("./partials/head") %>
-=======
 <!DOCTYPE html>
 <html
   lang="en"
@@ -48,24 +45,22 @@
   <!-- Helpers -->
   <script src="../../template/assets/vendor/js/helpers.js"></script>
   <script src="../../template/assets/js/config.js"></script>
+
+  <link rel="stylesheet" href="plugins/powerful-calendar/page.css">
+  <link rel="stylesheet" href="plugins/powerful-calendar/style.css">
+  <link rel="stylesheet" href="plugins/powerful-calendar/theme.css">
 </head>
->>>>>>> 2bd2056f0666634c8ef3225556f5f0c800e28917
 
 <body>
     <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
       <!-- Menu -->
-<<<<<<< HEAD
-      <%- include("./partials/header") %>
-=======
 
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
           <a href="index.html" class="app-brand-link">
-            <a href="index.html" class="app-brand-link">
             <img src="img/logo.jpg" class="w-100" alt="">
-          </a>
           </a>
 
           <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -87,7 +82,7 @@
           <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Landing</span>
           </li>
-          <li class="menu-item">
+          <li class="menu-item active open">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-dock-top"></i>
               <div data-i18n="Account Settings">Gestion</div>
@@ -108,14 +103,14 @@
                   <div data-i18n="Notifications">Reservas</div>
                 </a>
               </li>
-              <li class="menu-item ">
+              <li class="menu-item">
                 <a href="usuarios.html" class="menu-link">
                   <div data-i18n="Connections">Usuarios</div>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="menu-item active open">
+          <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-dock-top"></i>
               <div data-i18n="Account Settings">Usuarios</div>
@@ -126,7 +121,7 @@
                   <div data-i18n="Account">Mi cuenta</div>
                 </a>
               </li>
-              <li class="menu-item active">
+              <li class="menu-item">
                 <a href="datos_de_pago.html" class="menu-link">
                   <div data-i18n="Account">Datos de pago</div>
                 </a>
@@ -144,7 +139,7 @@
               <div data-i18n="Account Settings">Servicios</div>
             </a>
             <ul class="menu-sub">
-              <li class="menu-item">
+              <li class="menu-item active">
                 <a href="alquiler.html" class="menu-link">
                   <div data-i18n="Account">Alquiler de vehiculos</div>
                 </a>
@@ -160,7 +155,6 @@
 
         </ul>
       </aside>
->>>>>>> 2bd2056f0666634c8ef3225556f5f0c800e28917
       <!-- / Menu -->
 
     <!-- Layout container -->
@@ -171,18 +165,55 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Usuarios /</span> Personalizar </h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Alquiler</h4>
 
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
               <div class="card mb-4">
-                <h5 class="card-header">Mis datos de pago</h5>
+                <div class="d-flex align-items-center">
+                    <a class="card-header" href="alquiler.html">Eleccion de vehiculo</a> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="currentColor" d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414Z"/></svg>
+                    <a class="card-header" href="alquiler2.html">Opcion de alquiler</a> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="currentColor" d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414Z"/></svg>
+                    <a class="card-header" href="alquiler3.html">Pago</a>
+                </div>
+                
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
                   <form id="formAccountSettings" method="POST" onsubmit="return false">
-                    <div class="row">
-                      <div class="mb-3 col-md-6">
+                    <div class="row px-3">
+                      <div class="mb-3 col-md-12">
+                        <label class="form-label mb-3">Metodo de pago</label>
+                        <div class="d-flex">
+                          <div class="form-check">
+                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio1">
+                            <label class="form-check-label" for="defaultRadio1"> Tarjeta de credito </label>
+                          </div>
+                          <div class="form-check ms-3">
+                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio2">
+                            <label class="form-check-label" for="defaultRadio2"> Transferencia bancaria </label>
+                          </div>
+                          <div class="form-check ms-3">
+                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio3">
+                            <label class="form-check-label" for="defaultRadio3"> Paypal </label>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      
+                      <div class="mb-3 col-md-12">
+                        <label for="email" class="form-label">Email</label>
+                        <input
+                          class="form-control"
+                          type="email"
+                          id="email"
+                          name="email"
+                          value=""
+                          autofocus
+                        />
+                      </div>
+                      <div class="mb-3 col-md-12">
                         <label for="address" class="form-label">Direccion</label>
                         <input
                           class="form-control"
@@ -193,34 +224,8 @@
                           autofocus
                         />
                       </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="province" class="form-label">Estado/Provincia</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          id="province"
-                          name="province"
-                          value=""
-                          autofocus
-                        />
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="dni" class="form-label">Documento de identidad</label>
-                        <input class="form-control" type="number" name="dni" id="dni" value="" />
-                      </div>
-                      <div class="mb-3 col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input
-                          class="form-control"
-                          type="email"
-                          id="email"
-                          name="email"
-                          value=""
-                          placeholder="ejemplo@gmail.com"
-                        />
-                      </div>
-                      
-                      <div class="mb-3 col-md-4">
+                      <hr class="my-3">
+                      <div class="mb-3 col-md-12">
                         <label for="cardOwner" class="form-label">Titular</label>
                         <input
                           class="form-control"
@@ -228,72 +233,73 @@
                           id="cardOwner"
                           name="cardOwner"
                           value=""
-                          placeholder="504512345678"
+                          autofocus
                         />
                       </div>
-                      <div class="mb-3 col-md-4">
-                        <label for="cardNumber" class="form-label">Numero de tarjeta</label>
+                      <div class="mb-3 col-md-12">
+                        <label for="cardNumber" class="form-label">Numero de la tarjeta</label>
                         <input
                           class="form-control"
                           type="number"
                           id="cardNumber"
                           name="cardNumber"
                           value=""
-                          placeholder="504512345678"
+                          autofocus
                         />
                       </div>
-                      <div class="mb-3 col-md-2">
-                        <label for="cvv" class="form-label">CVV</label>
-                        <input
-                          class="form-control"
-                          type="password"
-                          id="cvv"
-                          name="cvv"
-                          value=""
-                          placeholder="123"
-                        />
-                      </div>
-                      <div class="mb-3 col-md-2">
+                      <div class="mb-3 pt-2 col-md-8">
+                        <label>Fecha de expiracion</label>
                         <div class="row">
-                          <label class="form-label">Vencimiento</label>
                           <div class="col-md-6">
                             <input
                               class="form-control"
                               type="number"
-                              id="expireMonth"
-                              name="expireMonth"
+                              id="month"
+                              name="month"
                               value=""
-                              placeholder="01"
+                              placeholder="mes"
+                              autofocus
                             />
                           </div>
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               type="number"
-                              id="expireYear"
-                              name="expireYear"
+                              id="year"
+                              name="year"
                               value=""
-                              placeholder="26"
+                              placeholder="año"
+                              autofocus
                             />
                           </div>
                         </div>
-                        
-                        
                       </div>
-                    </div>
+                      <div class="mb-3 col-md-4 ">
+                        <label for="cvv" class="form-label">CVV</label>
+                        <input
+                          class="form-control"
+                          type="number"
+                          id="cvv"
+                          name="cvv"
+                          value=""
+                          placeholder="123"
+                          autofocus
+                        />
+                      </div>
+
+                      
                     <div class="mt-2">
-                      <button type="submit" class="btn btn-primary me-2">Guardar</button>
+                      <button type="submit" class="btn btn-primary me-2">Continuar</button>
                       <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                     </div>
                   </form>
                 </div>
                 <!-- /Account -->
               </div>
+              <!-- Basic Bootstrap Table -->
+              
             <!-- / Content -->
 
-<<<<<<< HEAD
-<%- include("./partials/footer") %>
-=======
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
@@ -313,6 +319,10 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
+    <!--Calendar-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="plugins/powerful-calendar/calendar.min.js"></script>
+    <script src="https://unpkg.com/codeflask/build/codeflask.min.js"></script>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -336,4 +346,3 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
->>>>>>> 2bd2056f0666634c8ef3225556f5f0c800e28917

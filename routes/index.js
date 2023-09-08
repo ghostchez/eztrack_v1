@@ -4,7 +4,8 @@ let indexController = require("../controller/index");
 let userRolValidation = require("../middlewares/userRolValidation");
 
 /* GET users listing. */
-router.get("/",userRolValidation("any"),indexController.index);
-
+router.get("/",userRolValidation("any"),indexController.home);
+router.get("/login",indexController.login);
+router.post("/login",indexController.logear);
 
 module.exports = router;

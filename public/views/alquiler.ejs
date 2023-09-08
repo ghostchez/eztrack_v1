@@ -16,150 +16,40 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Alquiler</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Alquiler paso 1</h4>
 
           <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4">
-                <div class="d-flex align-items-center">
-                    <a class="card-header" href="alquiler.html">Eleccion de vehiculo</a> 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="currentColor" d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414Z"/></svg>
-                    <a class="card-header" href="alquiler2.html">Opcion de alquiler</a> 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="currentColor" d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414Z"/></svg>
-                    <a class="card-header" href="alquiler3.html">Pago</a>
-                </div>
-                
-                <!-- Account -->
-                <hr class="my-0" />
-                <div class="card-body">
-                  <form id="formAccountSettings" method="POST" action="/vehiculos/alquiler_paso2">
-                    <input type="hidden" name="vehiculo" value="<%- vehiculo.id %>">
-                    <div class="row">
-                        <div class="mb-3 row">
-                            <div class="col-md-3">
-                                <h5 class="mb-1">Tesla P3</h5>
-                                <img src="/assets/img/martinedit-640x427.jpg" style="border-radius: 4px;" class="w-75" alt="">
-                            </div>
-                            <div class="col-md-5 pt-4">
-                                Yes – it is True! Ringfreaks are going electric! This is the future and it is freaking fast! We are adding the Tesla Model 3 Performance which is fully prepared for racing, with the whole FIA safety equipment to our petrol race cars fleet.
-
-With a full charge of battery you can do at least 3 very fast laps, or if driving not on maximum attack – more. After that, at the Nurburgring there is Tesla supercharger V3 which will get you a 90-95% of charge in 30 minutes and after a small break – you can carry on doing fast laps!
-                            </div>
-                            <div class="col-md-1 text-center pt-4">
-                                <div>
-                                    <b>Modelo</b>
-                                    <p><%- vehiculo.modelo %></p>
-                                </div>
-                                <div>
-                                    <b>Marca</b>
-                                    <p><%- vehiculo.marca %></p>
-
-                                </div>
-                            </div>
-                            <div class="col-md-1 text-center pt-4">
-                                <div>
-                                    <b>Potencia</b>
-                                    <p><%- vehiculo.potencia %></p>
-
-                                </div>
-                                <div>
-                                    <b>Peso</b>
-                                    <p><%- vehiculo.peso %></p>
-                                </div>
-                            </div>
-                            <div class="col-md-1 text-center pt-4">
-                                <div>
-                                    <b>Año</b>
-                                    <p><%- vehiculo.año %></p>
-                                </div>
-                                <div>
-                                    <b>Clase</b>
-                                    <p>Elektro</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <h5 class="ms-4">Elegir fecha de alquiler</h5>
-                            <div class="calendar-wrapper" id="calendar-wrapper"></div>
-                            <input type="hidden" name="fecha" id="fecha">
-                            <div id="editor"></div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mt-3">
-                                <label for="exampleFormControlSelect1" class="form-label">Elegir Evento</label>
-                                <select class="form-select" name="evento" id="exampleFormControlSelect1" aria-label="Default select example">
-                                  <option selected>Seleccionar..</option>
-                                  <% eventos_lista.forEach(el => { %>
-                                    <option value="<%- el.id %>"><%- el.nombre %><%- el.nombre_evento %></option>
-                                  <% }) %>
-                                </select>
-                            </div>
-
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="mt-2">
-                      <button type="submit" class="btn btn-primary me-2">Continuar</button>
-                      <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                    </div>
-                  </form>
-                </div>
-                <!-- /Account -->
-              </div>
+            <div class="col-md-10">
+              <h4 class="fw-bold py-3 mb-4"> Lista vehiculos</h4>
               <!-- Basic Bootstrap Table -->
-              
+              <% if (vehiculos_lista.length > 0) { %>
+                <% vehiculos_lista.forEach(v => { %>
+                  <div class="card mb-4 py-3">
+                  <div class="row">    
+                      <div class="col-md-4">
+                      <img style="width: 60%;" class="d-block mx-auto" src="/assets/img/img1.png" alt="">
+                    </div>
+                    <div class="col-md-8">
+                      <p class="fs-3 fw-bold"><%- v.marca %> <%- v.modelo %></p>
+                      <p >Potencia <i class="fa-solid fa-gauge fa-lg"></i> <%- v.potencia %> <span class="ms-3">Año</span> <i class="fa-solid fa-calendar-days fa-lg"></i> <%- v.año %></p>
+                      <p >Peso <i class="fa-solid fa-weight-hanging fa-lg"></i> <%- v.peso %></p>
+                      <hr>
+                      <div class="row px-3">
+                        <div class="col-md-9">
+                          <p class="text-end">Precio desde 10 us$</p>
+                        </div>
+                        <div class="col-3">
+                          <a href="/vehiculos/alquiler/<%- v.id %>" class="btn btn-warning w-100">Alquilar</a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+              <% }else{ %>
+                <p class="text-muted text-center fs-4 mb-5 mt-2 py-2 bg-light rounded-5">Ningun vehiculo encontrado</p>
+              <% } %>
             <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                
-              </div>
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-      </div>
-
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-     <!--Calendar-->
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <script src="/assets/plugins/powerful-calendar/calendar.min.js"></script>
-     <script src="https://unpkg.com/codeflask/build/codeflask.min.js"></script>
-     <script type="text/javascript">
-         var configuracion = `
-
-     
-     var defaultConfig = {
-     weekDayLength: 1,
-     date: '03/09/2023',
-     onClickDate: selectDate,
-     showYearDropdown: true,
-     startOnMonday: false,
-     formatDate:new Date().toLocaleDateString()
-     };
-     
-     var calendar = $('#calendar-wrapper').calendar(defaultConfig);
-     console.log(calendar.getSelectedDate());
-     function selectDate(date) {
-      calendar.updateCalendarOptions({
-        date: date
-      });
-      var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-
-      console.log(new Date().toLocaleDateString(calendar.getSelectedDate(), options));
-      document.querySelector("#fecha").value = new Date().toLocaleDateString(calendar.getSelectedDate(), options);
-     }
-     `;
-         eval(configuracion);
-        
-       </script>
 <%- include("./partials/footer") %>
+

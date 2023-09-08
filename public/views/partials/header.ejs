@@ -1,8 +1,8 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-      <a href="index.html" class="app-brand-link">
-        <a href="index.html" class="app-brand-link">
-        <img src="/assets/img/logo.jpg" class="w-100" alt="">
+      <a href="/" class="app-brand-link">
+        <a href="/" class="app-brand-link">
+        <img src="/assets/img/logo_eztrack.png" class="w-100" alt="">
       </a>
       </a>
 
@@ -16,7 +16,7 @@
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
       <li class="menu-item">
-        <a href="index.html" class="menu-link">
+        <a href="/" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Dashboard</div>
         </a>
@@ -32,22 +32,22 @@
         </a>
         <ul class="menu-sub">
           <li class="menu-item <% if(title == "vehiculos"){%> active <%}%> ">
-            <a href="/vehiculos/" class="menu-link ">
+            <a href="/admin/vehiculos/" class="menu-link ">
               <div data-i18n="Account">Vehiculos</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="eventos.html" class="menu-link">
+          <li class="menu-item <% if(title == "eventos"){%> active <%}%>">
+            <a href="/admin/eventos/" class="menu-link ">
               <div data-i18n="Account">Eventos</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="reservas.html" class="menu-link">
+          <li class="menu-item <% if(title == "reservas"){%> active <%}%>">
+            <a href="/admin/reservas/" class="menu-link">
               <div data-i18n="Notifications">Reservas</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="usuarios.html" class="menu-link">
+          <li class="menu-item <% if(title == "usuarios"){%> active <%}%>">
+            <a href="/admin/usuarios/" class="menu-link">
               <div data-i18n="Connections">Usuarios</div>
             </a>
           </li>
@@ -59,18 +59,18 @@
           <div data-i18n="Account Settings">Usuarios</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item <% if(title == "mi_cuenta"){%> active <%}%> ">
+          <li class="menu-item <% if(title == "mi cuenta"){%> active <%}%> ">
             <a href="/usuarios/mi_cuenta" class="menu-link">
               <div data-i18n="Account">Mi cuenta</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="datos_de_pago.html" class="menu-link">
+          <li class="menu-item <% if(title == "datos de pago"){%> active <%}%>">
+            <a href="/usuarios/datos_pago/" class="menu-link">
               <div data-i18n="Account">Datos de pago</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="ordenes.html" class="menu-link">
+          <li class="menu-item <% if(title == "mis ordenes"){%> active <%}%>">
+            <a href="/usuarios/mis_ordenes/" class="menu-link">
               <div data-i18n="Notifications">Mis ordenes</div>
             </a>
           </li>
@@ -82,11 +82,8 @@
           <div data-i18n="Account Settings">Servicios</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item <% if(title == "alquiler"){%> active <%}%> ">
-            <a href="/vehiculos/lista_vehiculos" class="menu-link">
-              <div data-i18n="Account">Lista de vehiculos</div>
-            </a>
-            <a href="/vehiculos/alquiler" class="menu-link">
+          <li class="menu-item <% if(title == "alquiler paso 1" || title == "alquiler paso 2" || title == "alquiler paso 3" || title == "alquiler paso 4"){%> active <%}%> ">
+            <a href="/servicios/alquiler/" class="menu-link">
               <div data-i18n="Account">Alquiler de vehiculos</div>
             </a>
           </li>

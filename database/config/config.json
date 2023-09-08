@@ -7,17 +7,17 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "eztrack",
-    "password": "(*TFI)38891415",
-    "database": "eztrack_db",
-    "host": "mysql-eztrack.alwaysdata.net",
+    "username": "conrado",
+    "password": "0341rccapo",
+    "database": "eztrack",
+    "host": "mysql-conrado.alwaysdata.net",
     "dialect": "mysql"
   },
   "production": {
-    "username": "eztrack",
-    "password": "(*TFI)38891415",
-    "database": "eztrack_db",
-    "host": "mysql-eztrack.alwaysdata.net",
+    "username": "conrado",
+    "password": "0341rccapo",
+    "database": "eztrack",
+    "host": "mysql-conrado.alwaysdata.net",
     "dialect": "mysql"
   }
 }
