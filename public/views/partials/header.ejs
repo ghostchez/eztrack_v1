@@ -83,7 +83,7 @@
         </a>
         <ul class="menu-sub">
           <li class="menu-item <% if(title == "alquiler paso 1" || title == "alquiler paso 2" || title == "alquiler paso 3" || title == "alquiler paso 4"){%> active <%}%> ">
-            <a href="/servicios/alquiler/" class="menu-link">
+            <a href="/servicios/alquiler<%- sess.paso%>/<%- sess.idAlquiler %>" class="menu-link">
               <div data-i18n="Account">Alquiler de vehiculos</div>
             </a>
           </li>

@@ -20,7 +20,7 @@ let indexController = {
             let result = await usuarios.findOne({where:{password:password,email:email}});
             
             if(result){
-                sess = req.session;
+                sess = req.session ?? null;
                 sess.email = result.email;
                 sess.nombre = result.nombre;
                 sess.telefono = result.telefono;

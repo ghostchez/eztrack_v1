@@ -4,28 +4,40 @@ const {usuarios,vehiculos,eventos,reservas,opcion_alquileres}  = require("../dat
 let alquileresController = {
     alquiler:async (req,res) =>{
         let vehiculos_lista = await vehiculos.findAll();
-        res.render("./alquiler",{tab:"servicios",title:"alquiler paso 1",vehiculos_lista});
+        
+        res.render("./alquiler",{sess:req.session,tab:"servicios",title:"alquiler paso 1",vehiculos_lista});
     },
     alquiler2:async (req,res) =>{
         let {id} = req.params;
         let vehiculo = await vehiculos.findOne({where:{id}});
         let eventos_lista = await eventos.findAll();
-    
-        res.render("./alquiler2",{tab:"servicios",title:"alquiler paso 2",vehiculo,eventos_lista});
+        console.log(vehiculo.id);
+        let sess = req.session ?? null;
+        sess.idAlquiler = vehiculo.id;
+        sess.paso = 2;
+        req.session.save(function(err) {
+            console.log("saved");
+        })
+        res.render("./alquiler2",{sess:req.session,tab:"servicios",title:"alquiler paso 2",vehiculo,eventos_lista});
     },
     alquiler_paso2:async (req,res) =>{
-        sess = req.session;
         const {vehiculo,evento,fecha} = req.body;
+        let sess = req.session ?? null;
         let result = await reservas.create({
             idUsuario:sess.idUser,idVehiculo:vehiculo,idEvento:evento,fecha:fecha
         });
-        res.redirect("/servicios/alquiler2/"+result.dataValues.id);
+
+        sess.paso = 3;
+        req.session.save(function(err) {
+            console.log("saved");
+        })
+        res.redirect("/servicios/alquiler3/"+result.dataValues.id);
     },
     alquiler3:async (req,res) =>{
         let vehiculos_lista = await vehiculos.findAll();
         let {id} = req.params;
     
-        res.render("./alquiler3",{tab:"servicios",title:"alquiler paso 3",vehiculos_lista,id});
+        res.render("./alquiler3",{sess:req.session,tab:"servicios",title:"alquiler paso 3",vehiculos_lista,id});
     },
     alquiler_paso3:async (req,res) =>{
         const {cantidadVueltas,naftaIncluida,instructorABordo,analisisTelemetria,seguroPremium,compuestoNeumaticos,idReserva} = req.body;
@@ -35,13 +47,18 @@ let alquileresController = {
         let result = await reservas.update({
             idOpcionAlquiler:resultado.dataValues.id
         },{where:{id:idReserva}});
-    
-        res.redirect("/servicios/alquiler3/"+idReserva);
+
+        let sess = req.session ?? null;
+        sess.paso = 4;
+        req.session.save(function(err) {
+            console.log("saved");
+        })
+        res.redirect("/servicios/alquiler4/"+idReserva);
     },
     alquiler4:async (req,res) =>{
         let vehiculos_lista = await vehiculos.findAll();
-    
-        res.render("./alquiler4",{tab:"servicios",title:"alquiler paso 4",vehiculos_lista});
+        console.log(req.session)
+        res.render("./alquiler4",{sess:req.session,tab:"servicios",title:"alquiler paso 4"});
     },
     
 }

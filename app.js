@@ -36,7 +36,7 @@ app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(session({
   secret: 'marianoCMS',
-  resave: false,
+  resave: true,
   saveUninitialized: true,
 }))
 app.use(flash());
@@ -55,7 +55,7 @@ let listen = app.listen(port,()=>{
 let moment = require('moment');
 moment.locale('es');
 app.use(function(req, res, next){
-  res.locals.session = req.session;
+  res.locals.session = req.session ?? null;
   res.locals.moment = moment;
   next();
 });

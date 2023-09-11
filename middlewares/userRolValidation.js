@@ -1,6 +1,6 @@
 const userRolValidation = (type) =>{
     return (req, res, next) => {
-        let sess = req.session;
+        let sess = req.session ?? null;
         if(sess){
             next()
         }

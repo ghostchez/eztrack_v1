@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 const {usuarios,vehiculos,eventos,reservas,opcion_alquileres}  = require("../database/models");
 let reservasController = {
     create: (req, res) => {
-        res.render("./eventos",{tab:"gestion",title:"eventos"});
+        res.render("./eventos",{sess:req.session,tab:"gestion",title:"eventos"});
     }
 }
 

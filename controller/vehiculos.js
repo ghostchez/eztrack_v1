@@ -5,7 +5,7 @@ let vehiculosController = {
     create:async (req,res) =>{
         try {
             let vehiculos_list = await vehiculos.findAll();
-            res.render("./vehiculos",{tab:"gestion",title:"vehiculos",vehiculos_list});
+            res.render("./vehiculos",{sess:req.session,tab:"gestion",title:"vehiculos",vehiculos_list});
         } catch (error) {
             console.log(error)
         }
