@@ -21,10 +21,32 @@
           <div data-i18n="Analytics">Dashboard</div>
         </a>
       </li>
+      <% if (!sess.nombre) { %>
+        <li class="menu-item">
+          <a href="/login" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <div data-i18n="Analytics">Login</div>
+          </a>
+        </li>
+        <% } else { %>
+        <li class="menu-item">
+          <p  class="ps-4 mx-2 my-0">
+            <i class="menu-icon tf-icons bx bx-user"></i>
+            <span data-i18n="Analytics"><%- sess.nombre %></span>
+          </p>
+        </li>
+        <li class="menu-item">
+          <a href="/logout" class="menu-link my-0">
+            <div class="text-danger" data-i18n="Analytics">Cerrar Session</div>
+          </a>
+        </li>
+      <% } %>
+      
 
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Landing</span>
       </li>
+      <% if (sess && sess.rol == "administrador") { %>
       <li class="menu-item <% if(tab == "gestion"){%> active open <%}%>  ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -53,6 +75,8 @@
           </li>
         </ul>
       </li>
+      <% } %>
+      <% if (sess) { %>
       <li class="menu-item <% if(tab == "usuarios"){%> active open <%}%> ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -76,6 +100,7 @@
           </li>
         </ul>
       </li>
+      <% } %>
       <li class="menu-item <% if(tab == "servicios"){%> active open <%}%> ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-dock-top"></i>

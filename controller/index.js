@@ -1,6 +1,6 @@
 const session = require("express-session");
 const { Op } = require("sequelize");
-const {usuarios,vehiculos,eventos,reservas,opcion_alquileres}  = require("../database/models");
+const {usuarios,vehiculos,eventos,reservas,opcion_alquileres,roles}  = require("../database/models");
 let indexController = {
     home:async (req, res) => {
         try {
@@ -17,14 +17,16 @@ let indexController = {
     logear:async (req,res)=>{
         try{
             const {password,email} = req.body;
-            let result = await usuarios.findOne({where:{password:password,email:email}});
-            
+            let result = await usuarios.findOne({where:{password:password,email:email},include:[{model:roles,as:"rol"}]});
+            console.log(result);
             if(result){
                 sess = req.session ?? null;
                 sess.email = result.email;
                 sess.nombre = result.nombre;
                 sess.telefono = result.telefono;
                 sess.idUser = result.id;
+                sess.idUser = result.id;
+                sess.rol = result.rol.rol;
                 req.session.save(function(err) {
                     console.log("saved");
                 })
@@ -44,7 +46,7 @@ let indexController = {
         req.session.destroy((err)=>{
             console.log("destroy");
         });
-        res.redirect("/index/login");
+        res.redirect("/login");
     },
 }
 

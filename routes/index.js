@@ -7,5 +7,6 @@ let userRolValidation = require("../middlewares/userRolValidation");
 router.get("/",userRolValidation("any"),indexController.home);
 router.get("/login",indexController.login);
 router.post("/login",indexController.logear);
+router.get("/logout",indexController.logout);
 
 module.exports = router;

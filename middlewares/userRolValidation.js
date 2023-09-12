@@ -5,7 +5,7 @@ const userRolValidation = (type) =>{
             next()
         }
         else{
-            res.redirect("/index/login/")
+            res.redirect("/login/")
         }
         /*if(sess && sess.rols && sess.rols.length > 0){
             let correctRol = (type == "any") ? true : false;
