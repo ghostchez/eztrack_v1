@@ -12,9 +12,9 @@ let vehiculosController = {
     },
     store:async (req,res) =>{
         try{
-            const {model,brand,year,power,weight,level} = req.body;
+            const {model,brand,year,power,weight,level,description,traction,lap_price} = req.body;
             let result = await vehiculos.create({
-                modelo:model,marca:brand,año:year,potencia:power,peso:weight,nivel:level
+                modelo:model,marca:brand,traccion:traction,año:year,potencia:power,peso:weight,nivel:level,descripcion:description,precio_vuelta:lap_price
             });
             
             if(result){

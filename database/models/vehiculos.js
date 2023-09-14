@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     año: DataTypes.INTEGER,
     peso: DataTypes.INTEGER,
     potencia: DataTypes.INTEGER,
+    traccion: DataTypes.INTEGER,
+    precio_vuelta: DataTypes.INTEGER,
+    descripcion: DataTypes.STRING,
     disponibilidad: DataTypes.INTEGER,
   }, {
     sequelize,

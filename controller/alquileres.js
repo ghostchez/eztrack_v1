@@ -21,17 +21,32 @@ let alquileresController = {
         res.render("./alquiler2",{sess:req.session,tab:"servicios",title:"alquiler paso 2",vehiculo,eventos_lista});
     },
     alquiler_paso2:async (req,res) =>{
-        const {vehiculo,evento,fecha} = req.body;
-        let sess = req.session ?? null;
-        let result = await reservas.create({
-            idUsuario:sess.idUser,idVehiculo:vehiculo,idEvento:evento,fecha:fecha
-        });
+        try {
+            if(req.body.reset){
+                let sess = req.session;
+                delete sess["paso"]; 
+                delete sess["idAlquiler"]; 
+                req.session.save(function(err) {
+                    console.log("borrado");
+                })
+                res.redirect("/servicios/alquiler/");
+                throw("reset")
+            }
+            const {vehiculo,evento,fecha} = req.body;
+            let sess = req.session ?? null;
+            let result = await reservas.create({
+                idUsuario:sess.idUser,idVehiculo:vehiculo,idEvento:evento,fecha:fecha
+            });
 
-        sess.paso = 3;
-        req.session.save(function(err) {
-            console.log("saved");
-        })
-        res.redirect("/servicios/alquiler3/"+result.dataValues.id);
+            sess.paso = 3;
+            req.session.save(function(err) {
+                console.log("saved");
+            })
+            res.redirect("/servicios/alquiler3/"+result.dataValues.id);
+        } catch (error) {
+            
+        }
+        
     },
     alquiler3:async (req,res) =>{
         let vehiculos_lista = await vehiculos.findAll();

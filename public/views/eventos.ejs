@@ -25,26 +25,45 @@
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" method="POST" onsubmit="return false">
+                  <form id="formAccountSettings" method="POST" action="/admin/eventos">
                     <div class="row">
                       <div class="mb-3 col-md-4">
-                        <label for="firstName" class="form-label">Nombre</label>
-                        <input
+                        <label for="name" class="form-label">Nombre</label>
+                        <input required
                           class="form-control"
                           type="text"
-                          id="firstName"
-                          name="firstName"
+                          id="name"
+                          name="name"
                           value=""
                           autofocus
                         />
                       </div>
                       <div class="mb-3 col-md-4">
-                        <label for="date" class="form-label">Fecha</label>
-                        <input class="form-control" type="date" name="date" id="date" value="" />
+                        <label for="name_autodrome" class="form-label">Nombre de Autodromo</label>
+                        <input required
+                          class="form-control"
+                          type="text"
+                          id="name_autodrome"
+                          name="name_autodrome"
+                          value=""
+                          autofocus
+                        />
                       </div>
                       <div class="mb-3 col-md-4">
+                        <label for="name_event" class="form-label">Nombre de Evento</label>
+                        <input required
+                          class="form-control"
+                          type="text"
+                          id="name_event"
+                          name="name_event"
+                          value=""
+                          autofocus
+                        />
+                      </div>
+                      
+                      <div class="mb-3 col-md-6">
                         <label for="location" class="form-label">Ubicacion</label>
-                        <input
+                        <input required
                           class="form-control"
                           type="text"
                           id="location"
@@ -53,7 +72,60 @@
                           placeholder=""
                         />
                       </div>
-                     
+                      <div class="mb-3 col-md-6">
+                        <label for="city" class="form-label">Ciudad</label>
+                        <select class="form-control" id="city" required name="city">
+                          <option> Elegir ciudad</option>
+                          <option value="Almirante Brown"> Almirante Brown</option>
+                          <option value="Avellaneda"> Avellaneda</option>
+                          <option value="Berazategui"> Berazategui</option>
+                          <option value="Berisso"> Berisso</option>
+                          <option value="Brandsen"> Brandsen</option>
+                          <option value="Campana"> Campana</option>
+                          <option value="Cañuelas"> Cañuelas</option>
+                          <option value="Ensenada"> Ensenada</option>
+                          <option value="Escobar"> Escobar</option>
+                          <option value="Esteban Echeverría"> Esteban Echeverría</option>
+                          <option value="Exaltación"> Exaltación</option>
+                          <option value="Ezeiza"> Ezeiza</option>
+                          <option value="Florencio Varela"> Florencio Varela</option>
+                          <option value="Gral. Las Heras"> Gral. Las Heras</option>
+                          <option value="Gral. Rodríguez"> Gral. Rodríguez</option>
+                          <option value="Gral. San Martín"> Gral. San Martín</option>
+                          <option value="Hurlingham"> Hurlingham</option>
+                          <option value="Ituzaingó"> Ituzaingó</option>
+                          <option value="José C. Paz"> José C. Paz</option>
+                          <option value="La Matanza"> La Matanza</option>
+                          <option value="La Plata"> La Plata</option>
+                          <option value="Lanús"> Lanús</option>
+                          <option value="Lomas de Zamora"> Lomas de Zamora</option>
+                          <option value="Luján"> Luján</option>
+                          <option value="Malvinas Argentinas"> Malvinas Argentinas</option>
+                          <option value="Marcos Paz"> Marcos Paz</option>
+                          <option value="Merlo"> Merlo</option>
+                          <option value="Moreno"> Moreno</option>
+                          <option value="Morón"> Morón</option>
+                          <option value="Quilmes"> Quilmes</option>
+                          <option value="Pilar"> Pilar</option>
+                          <option value="Presidente Perón"> Presidente Perón</option>
+                          <option value="San Fernando"> San Fernando</option>
+                          <option value="San Isidro"> San Isidro</option>
+                          <option value="San Miguel"> San Miguel</option>
+                          <option value="San Vicente"> San Vicente</option>
+                          <option value="Tigre"> Tigre</option>
+                          <option value="Tres de Febrero"> Tres de Febrero</option>
+                          <option value="Vicente López"> Vicente López</option>
+                          <option value="Zárate"> Zárate</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="date_from" class="form-label">Fecha desde</label>
+                        <input required class="form-control" type="date" name="date_from" id="date_from" value="" />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="date_to" class="form-label">Fecha hasta</label>
+                        <input required class="form-control" type="date" name="date_to" id="date_to" value="" />
+                      </div>
                     </div>
                     <div class="mt-2">
                       <button type="submit" class="btn btn-primary me-2">Guardar</button>
@@ -73,79 +145,40 @@
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Fecha</th>
-                        <th>Ubicacion</th>
+                        <th>Ciudad</th>
+                        <th>Autodromo</th>
+                        <th>Evento</th>
                         <th>Estado</th>
                         <th>Accion</th>
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>1</strong></td>
-                        <td>Redbull 2023 invierno</td>
-                        <td>12/07/2023</td>
-                        <td>Palermo Buenos aires</td>
-                        <td><span class="badge bg-label-warning me-1">Inactivo</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="eventos_editar.html">
-                                <i class="bx bx-edit-alt me-1"></i> Editar</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);">
-                                <i class="bx bx-trash me-1"></i> Borrar</a
-                              >
+                      <% eventos_list.forEach(eve => { %>
+                        <tr>
+                          <td> <strong><%- eve.id %></strong></td>
+                          <td><%- eve.nombre %></td>
+                          <td><%- eve.fecha_desde %> - <%- eve.fecha_hasta %></td>
+                          <td><%- eve.ciudad %></td>
+                          <td><%- eve.nombre_autodromo %></td>
+                          <td><%- eve.nombre_evento %></td>
+                          <td><span class="badge bg-label-success me-1">Activo</span></td>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/admin/eventos">
+                                  <i class="bx bx-edit-alt me-1"></i> Editar</a
+                                >
+                                <a class="dropdown-item" href="javascript:void(0);">
+                                  <i class="bx bx-trash me-1"></i> Borrar</a
+                                >
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>1</strong></td>
-                        <td>Redbull 2023 invierno</td>
-                        <td>12/07/2023</td>
-                        <td>Palermo Buenos aires</td>
-                        <td><span class="badge bg-label-warning me-1">Inactivo</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="eventos_editar.html">
-                                <i class="bx bx-edit-alt me-1"></i> Editar</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);">
-                                <i class="bx bx-trash me-1"></i> Borrar</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>1</strong></td>
-                        <td>Redbull 2023 invierno</td>
-                        <td>12/07/2023</td>
-                        <td>Palermo Buenos aires</td>
-                        <td><span class="badge bg-label-warning me-1">Inactivo</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="eventos_editar.html">
-                                <i class="bx bx-edit-alt me-1"></i> Editar</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);">
-                                <i class="bx bx-trash me-1"></i> Borrar</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-
+                          </td>
+                        </tr>
+                      <% }) %>
                     </tbody>
                   </table>
                 </div>

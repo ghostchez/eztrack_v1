@@ -22,21 +22,32 @@
             <div class="col-md-10">
               <h4 class="fw-bold py-3 mb-4"> Lista vehiculos</h4>
               <!-- Basic Bootstrap Table -->
-              <% if (vehiculos_lista.length > 0) { %>
+              <% if (vehiculos_lista.length == 0) { %>
+                <p class="text-muted text-center fs-4 mb-5 mt-2 py-2 bg-light rounded-5">Ningun vehiculo encontrado</p>
+                
+              <% } else if (vehiculos_lista.length > 0) { %>
                 <% vehiculos_lista.forEach(v => { %>
                   <div class="card mb-4 py-3">
                   <div class="row">    
-                      <div class="col-md-4">
-                      <img style="width: 60%;" class="d-block mx-auto" src="/assets/img/img1.png" alt="">
+                      <div class="col-md-3">
+                      <img style="width: 85%;" class="d-block mx-auto" src="/assets/img/img1.png" alt="">
                     </div>
-                    <div class="col-md-8">
-                      <p class="fs-3 fw-bold"><%- v.marca %> <%- v.modelo %></p>
-                      <p >Potencia <i class="fa-solid fa-gauge fa-lg"></i> <%- v.potencia %> <span class="ms-3">Año</span> <i class="fa-solid fa-calendar-days fa-lg"></i> <%- v.año %></p>
-                      <p >Peso <i class="fa-solid fa-weight-hanging fa-lg"></i> <%- v.peso %></p>
-                      <hr>
+                    <div class="col-md-9 row">
+                      <div class="col-md-4">
+                        <p class="fs-3 fw-bold"><%- v.marca %> <%- v.modelo %></p>
+                        <p >Potencia <i class="fa-solid fa-gauge fa-lg"></i> <%- v.potencia %> <span class="ms-3">Año</span> <i class="fa-solid fa-calendar-days fa-lg"></i> <%- v.año %></p>
+                        <p >Peso <i class="fa-solid fa-weight-hanging fa-lg"></i> <%- v.peso %></p>
+                      </div>
+                      <div class="col-md-8">
+                        <p class="pt-3">
+                          <%- v.descripcion %>
+                        </p>
+                      </div>
+
+                      <hr class="col-12">
                       <div class="row px-3">
                         <div class="col-md-9">
-                          <p class="text-end">Precio desde 10 us$</p>
+                          <p class="text-end">Precio desde <%- v.precio_vuelta %> us$</p>
                         </div>
                         <div class="col-3">
                           <a href="/servicios/alquiler2/<%- v.id %>" class="btn btn-warning w-100">Alquilar</a>
@@ -47,8 +58,6 @@
                   </div>
                 </div>
                 <% }) %>
-              <% }else{ %>
-                <p class="text-muted text-center fs-4 mb-5 mt-2 py-2 bg-light rounded-5">Ningun vehiculo encontrado</p>
               <% } %>
             <!-- / Content -->
 <%- include("./partials/footer") %>
