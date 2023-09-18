@@ -369,7 +369,7 @@
         if (day == todayDate.toString()) today = true;
         today = today ? " today" : "";
 
-        var dateDisabled = "ola";
+        var dateDisabled = "disabled";
         if (
           (settings.min && settings.min > day) ||
           (settings.max && settings.max < day) ||
