@@ -1,3 +1,11 @@
+form .error-validacion {
+  display: none;
+  color: red;
+}
+form .error-validacion.activo {
+  display: block;
+}
+
 #alquiler2 #calendar-wrapper .day[disabled] {
   background-color: rgba(237, 237, 237, 0.55);
   border-radius: 3px;

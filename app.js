@@ -8,8 +8,43 @@ let bodyParser = require('body-parser');
 require('dotenv').config()
 const winston = require('winston');
 var methodOverride = require('method-override');
+const multer = require("multer");
 
 let port = process.env.PORT;
+
+//Setting storage engine
+const storageEngine = multer.diskStorage({
+  destination: "./public/assets/image_vehiculos",
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}--${file.originalname}`);
+  },
+});
+
+//initializing multer
+const upload = multer({
+  storage: storageEngine,
+  limits: { fileSize: 1000000 },
+  fileFilter: (req, file, cb) => {
+    checkFileType(file, cb);
+  },
+});
+
+const checkFileType = function (file, cb) {
+  //Allowed file extensions
+  const fileTypes = /jpeg|jpg|png/;
+
+  //check extension names
+  const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
+
+  const mimeType = fileTypes.test(file.mimetype);
+
+  if (mimeType && extName) {
+    return cb(null, true);
+  } else {
+    cb("Error: You can Only Upload Images!!");
+  }
+};
+
 
 
 let app = express();
@@ -30,15 +65,20 @@ app.set('trust proxy', 1) // trust first proxy
 app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'ejs');
 
+/*app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+*/
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(session({
-  secret: 'marianoCMS',
+  secret: 'conradoABM',
   resave: true,
   saveUninitialized: true,
 }))
+
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -59,7 +99,6 @@ app.use(function(req, res, next){
   res.locals.moment = moment;
   next();
 });
-
 
 //logger de errores
 const logger = winston.createLogger({
@@ -88,10 +127,21 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+app.post("/admin/vehiculos", upload.single("featuredImage"), (req, res,next) => {
+  if (req.file) {
+    next();
+  } else {
+    res.status(404).send("Please upload a valid image");
+  }
+});
+
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/admin', adminRouter);
 app.use('/servicios', serviciosRouter);
+
+
 
 module.exports = app;
 

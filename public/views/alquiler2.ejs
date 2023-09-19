@@ -147,7 +147,6 @@
           showYearDropdown: true,
           startOnMonday: false,
           disable: function (date) { 
-            console.log("hola?");
             if(date_desde != null){
               if(new Date(date) < new Date(date_desde) || new Date(date) > new Date(date_hasta)){
                 return true;

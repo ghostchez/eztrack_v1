@@ -30,7 +30,7 @@
                   <div class="card mb-4 py-3">
                   <div class="row">    
                       <div class="col-md-3">
-                      <img style="width: 85%;" class="d-block mx-auto" src="/assets/img/img1.png" alt="">
+                      <img style="width: 85%;" class="d-block mx-auto" src="/assets/image_vehiculos/<%- v.img %>" onerror="if (this.src != '/assets/img/default-car.png') this.src = '/assets/img/default-car.png';" alt="">
                     </div>
                     <div class="col-md-9 row">
                       <div class="col-md-4">
@@ -43,11 +43,10 @@
                           <%- v.descripcion %>
                         </p>
                       </div>
-
                       <hr class="col-12">
                       <div class="row px-3">
                         <div class="col-md-9">
-                          <p class="text-end">Precio desde <%- v.precio_vuelta %> us$</p>
+                          <p class="text-end">Precio desde <%- v.precio_vuelta %> $</p>
                         </div>
                         <div class="col-3">
                           <a href="/servicios/alquiler2/<%- v.id %>" class="btn btn-warning w-100">Alquilar</a>

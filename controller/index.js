@@ -12,13 +12,12 @@ let indexController = {
         
     },
     login:(req,res)=>{
-        res.render("./login",{title:"Login"});
+        res.render("./login",{title:"Login",error:req.query.error});
     },
     logear:async (req,res)=>{
         try{
             const {password,email} = req.body;
             let result = await usuarios.findOne({where:{password:password,email:email},include:[{model:roles,as:"rol"}]});
-            console.log(result);
             if(result){
                 sess = req.session ?? null;
                 sess.email = result.email;
@@ -33,7 +32,7 @@ let indexController = {
                 res.redirect("/servicios/alquiler")
             }
             else{
-                res.render("./login",{error:true});
+                res.redirect("/login?error=true")
             }
         }
         catch(e){

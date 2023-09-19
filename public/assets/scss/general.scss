@@ -1,0 +1,10 @@
+form{
+    .error-validacion{
+        display: none;
+        color: red;
+    }
+    .error-validacion.activo{
+        display: block;
+    }
+
+}

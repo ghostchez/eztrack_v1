@@ -17,17 +17,32 @@
               <!-- /Logo -->
               <h4 class="mb-2 text-center">Login - EZTrack</h4>
 
-              <form id="formAuthentication" class="mb-3" action="/login" method="POST">
+              <form id="formAuthentication" class="mb-3 form-validate" action="/login" method="POST">
+                <% if (error) { %>
+                 <div class="error-validacion activo" id="error-submit">
+                    Datos ingresados incorrectos, vuelva a intentar.
+                 </div>
+                 <script>
+                  setTimeout(() => {
+                    document.querySelector("#error-submit").classList.remove("activo");
+                  }, 5000);
+                 </script>
+                <% } %>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control validate"
                     id="email"
                     name="email"
                     placeholder="Ingrese el correo electronico"
+                    data-validation-type="email"
+                    data-validation-length=""
                     autofocus
                   />
+                  <div class="error-validacion">
+                    Email debe ser un correo electronico valido ej:prueba@gmail.com
+                  </div>
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
@@ -40,12 +55,17 @@
                     <input
                       type="password"
                       id="password"
-                      class="form-control"
+                      class="form-control validate"
                       name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      placeholder=""
                       aria-describedby="password"
+                      data-validation-type="password"
+                      data-validation-length="5_15"
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    <div class="error-validacion">
+                      Password debe tener caracteres y numeros. Entre 5 y 15 caracteres alfanumericos.
+                    </div>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -54,6 +74,12 @@
                     <label class="form-check-label" for="remember-me"> Remember Me </label>
                   </div>
                 </div>
+                <% if (true) { %>
+                  <div class="mb-3">
+
+                  </div>
+                <% } %>
+                
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" type="submit">Ingresar</button>
                 </div>

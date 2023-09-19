@@ -25,15 +25,12 @@ let usuariosController = {
         
     },
     mi_cuenta:(req,res)=>{
-        console.log(req.session);
         res.render("./mi_cuenta",{sess:req.session,tab:"usuarios",title:"mi cuenta"});
     },
     datos_pago:(req,res)=>{
-        console.log(req.session);
         res.render("./datos_pago",{sess:req.session,tab:"usuarios",title:"datos de pago"});
     },
     mis_ordenes:(req,res)=>{
-        console.log(req.session);
         res.render("./mis_ordenes",{sess:req.session,tab:"usuarios",title:"mis ordenes"});
     },
     
