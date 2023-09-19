@@ -76,7 +76,7 @@
         </ul>
       </li>
       <% } %>
-      <% if (sess) { %>
+      <% if (sess && sess.rol == "administrador" || sess.rol == "cliente") { %>
       <li class="menu-item <% if(tab == "usuarios"){%> active open <%}%> ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-dock-top"></i>
