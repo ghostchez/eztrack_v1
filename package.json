@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon node app.js"
+    "start": "nodemon node app.js",
+    "prod": "nodemon node app.js prod"
   },
   "dependencies": {
     "-": "^0.0.1",

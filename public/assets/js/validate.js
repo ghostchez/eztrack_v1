@@ -9,27 +9,50 @@ function ValidateEmail(email)
         return false
     }
 }
-function ValidatePassword(password,min,max) 
+function ValidatePassword(password,min = false,max = false) 
 {
-    let regex = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{'+ min +','+ max +'}$');
+    let regex = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
+    console.log(regex)
+
     if (regex.test(password)){
         return true
     }else{
         return false
     }
 }
-function ValidateNumber(number) 
+function ValidateAlphanumeric(text,min = false,max = false) 
 {
-    if (/^\d+$/.test(number)){
+    let regex = new RegExp('^([a-zA-Z0-9]){'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
+    if (regex.test(text.trimEnd())){
         return true
     }else{
         return false
     }
 }
-
+function ValidateAlphanumeric_space(text,min = false,max = false) 
+{
+    let regex = new RegExp('^([a-zA-Z0-9 ]){'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
+    if (regex.test(text.trimEnd())){
+        return true
+    }else{
+        return false
+    }
+}
+function ValidateNumber(number,min = false,max = false) 
+{
+    let regex = new RegExp('^([0-9]){'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
+    console.log(regex)
+    if (regex.test(number)){
+        return true
+    }else{
+        return false
+    }
+}
+let array_timeout = [];
 forms.forEach(form => {
     let no_error = false;
     form.addEventListener("submit",(e)=>{
+        
         if (!no_error)e.preventDefault();
         else{
             return true;
@@ -43,28 +66,39 @@ forms.forEach(form => {
             let length = field.dataset.validationLength ?? false;
             let min_max = (length) ? length.split("_") : [0,0];
             let validacion_resultado;
+            console.log(min_max)
             if(type == "email") 
                 validacion_resultado = ValidateEmail(field.value);
             else if(type == "password") 
                 validacion_resultado = ValidatePassword(field.value,min_max[0],min_max[1]);
             else if(type == "number") 
-                validacion_resultado = ValidateNumber(field.value);
+                validacion_resultado = ValidateNumber(field.value,min_max[0],min_max[1]);
+            else if(type == "alphanumeric_space") 
+                validacion_resultado = ValidateAlphanumeric_space(field.value,min_max[0],min_max[1]);
+            else if(type == "alphanumeric") 
+                validacion_resultado = ValidateAlphanumeric(field.value,min_max[0],min_max[1]);
             
             obj_resultados[field.id] = validacion_resultado;
         });
-        
+        for (let index = 0; index < array_timeout.length; index++) {
+            //console.log(array_timeout[index]);
+            clearTimeout(array_timeout[index]);
+        }
+        array_timeout = [];
         let positive_result = 0;
         for (const [key, value] of Object.entries(obj_resultados)) {
+            document.querySelector("#"+key).parentNode.querySelector(".error-validacion").classList.remove("activo");
             if(value == true) positive_result ++;
             else{
-                console.log(key+" "+value);
+                
                 document.querySelector("#"+key).parentNode.querySelector(".error-validacion").classList.add("activo");
-                setTimeout(() => {
+                let time = setTimeout(() => {
                     document.querySelector("#"+key).parentNode.querySelector(".error-validacion").classList.remove("activo");
                 }, 5000);
-
+                array_timeout.push(time);
             }
         }
+
         if(positive_result == cantidad_field){
             no_error = true;
             form.submit();

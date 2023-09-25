@@ -129,11 +129,12 @@ app.use(function(err, req, res, next) {
 
 
 app.post("/admin/vehiculos", upload.single("featuredImage"), (req, res,next) => {
-  if (req.file) {
-    next();
-  } else {
-    res.status(404).send("Please upload a valid image");
-  }
+  if (req.file) next();
+  else res.status(404).send("Please upload a valid image");
+});
+app.put("/admin/vehiculos/:id", upload.single("featuredImage"), (req, res,next) => {
+  if (req.file) next();
+  else res.status(404).send("Please upload a valid image");
 });
 
 app.use('/', indexRouter);
@@ -144,8 +145,3 @@ app.use('/servicios', serviciosRouter);
 
 
 module.exports = app;
-
-
-
-
-

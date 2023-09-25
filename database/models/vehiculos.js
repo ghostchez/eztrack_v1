@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     potencia: DataTypes.INTEGER,
     traccion: DataTypes.INTEGER,
     precio_vuelta: DataTypes.INTEGER,
+    nivel: DataTypes.INTEGER,
     descripcion: DataTypes.STRING,
     disponibilidad: DataTypes.INTEGER,
     img: DataTypes.STRING,

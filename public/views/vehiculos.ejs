@@ -21,96 +21,172 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-4">
-                <h5 class="card-header">Alta Vehiculos</h5>
+                <% if (typeof vehiculo_editar  != "undefined") { %>
+                  <h5 class="card-header">Editar Vehiculo</h5>
+                 <% } else{ %>
+                  <h5 class="card-header">Alta Vehiculo</h5>
+                <% } %>
+                
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" method="POST" action="/admin/vehiculos/" enctype="multipart/form-data">
-                    <input type="hidden" name="last_id" value="<%- last_id %>">
+                  <form id="formAccountSettings" class="form-validate" method="POST"
+                  <% if (typeof vehiculo_editar  != "undefined") { %>
+                    action="/admin/vehiculos/1?_method=PUT"  
+                  <% }else{ %>
+                    action="/admin/vehiculos/" 
+                  <% } %>
+                   enctype="multipart/form-data">
                     <div class="row">
                       <div class="mb-3 col-md-4">
                         <label for="model" class="form-label">Modelo</label>
                         <input
-                          class="form-control"
+                          class="form-control validate"
                           type="text"
                           id="model"
                           name="model"
-                          value=""
+                          data-validation-type="alphanumeric_space"
+                          data-validation-length="1_20"
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.modelo %>"
+                          <% } %>
                           autofocus
                         />
+                        <div class="error-validacion">
+                          Modelo debe ser alfanumerico de 1 a 20 caracteres, admite espacio.
+                        </div>
                       </div>
                       <div class="mb-3 col-md-4">
                         <label for="brand" class="form-label">Marca</label>
-                        <input class="form-control" type="text" name="brand" id="brand" value="" />
+                        <input class="form-control validate" type="text" name="brand" id="brand" 
+                        data-validation-type="alphanumeric_space"
+                        data-validation-length="1_20"
+                        <% if (typeof vehiculo_editar  != "undefined") { %>
+                          value="<%- vehiculo_editar.marca %>"
+                        <% } %> />
+                        <div class="error-validacion">
+                          Marca debe ser alfanumerico de 1 a 20 caracteres, admite espacio.
+                        </div>
                       </div>
                       <div class="mb-3 col-md-4">
                         <label for="year" class="form-label">Año</label>
                         <input
                           type="text"
-                          class="form-control"
+                          class="form-control validate"
                           id="year"
                           name="year"
-                          value=""
+                          data-validation-type="number"
+                          data-validation-length="4_4"
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.año %>"
+                          <% } %>
                         />
+                        <div class="error-validacion">
+                          Año debe ser un numero entero, de 4 caracteres.
+                        </div>
                       </div>
                       <div class="mb-3 col-md-6">
                         <label for="power" class="form-label">Potencia</label>
                         <input
-                          class="form-control"
+                          class="form-control validate"
                           type="text"
                           id="power"
                           name="power"
-                          value=""
+                          data-validation-type="number"
+                          data-validation-length=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.potencia %>"
+                          <% } %>
                           placeholder=""
                         />
+                        <div class="error-validacion">
+                          Potencia debe ser un numero entero.
+                        </div>
                       </div>
                       
                       <div class="mb-3 col-md-6">
                         <label for="weight" class="form-label">Peso</label>
                         <input
                           type="number"
-                          class="form-control"
+                          class="form-control validate"
                           id="weight"
                           name="weight"
-                          value=""
+                          data-validation-type="number"
+                          data-validation-length=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.peso %>"
+                          <% } %>
                         />
+                        <div class="error-validacion">
+                          Peso debe ser un numero entero.
+                        </div>
                       </div>
                       <div class="mb-3 col-md-4">
                         <label for="level" class="form-label">Nivel</label>
                         <input
-                          class="form-control"
+                          class="form-control validate"
                           type="number"
                           id="level"
                           name="level"
-                          value=""
+                          data-validation-type="number"
+                          data-validation-length=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.nivel %>"
+                          <% } %>
                           placeholder=""
                         />
+                        <div class="error-validacion">
+                          Nivel debe ser un numero entero.
+                        </div>
                       </div>
                       <div class="mb-3 col-md-4">
                         <label for="lap_price" class="form-label">Precio vuelta</label>
                         <input
                           type="number"
-                          class="form-control"
+                          class="form-control validate"
                           id="lap_price"
                           name="lap_price"
-                          value=""
+                          data-validation-type="number"
+                          data-validation-length=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.precio_vuelta %>"
+                          <% } %>
                         />
+                        <div class="error-validacion">
+                          Precio debe ser un numero entero.
+                        </div>
                       </div>
                       <div class="mb-3 col-md-4">
                         <label for="traction" class="form-label">Traccion</label>
                         <input
                           type="text"
-                          class="form-control"
+                          class="form-control validate"
                           id="traction"
                           name="traction"
-                          value=""
+                          data-validation-type="number"
+                          data-validation-length=""
+                          <% if (typeof vehiculo_editar  != "undefined") { %>
+                            value="<%- vehiculo_editar.traccion %>"
+                          <% } %>
                         />
+                        <div class="error-validacion">
+                          Traccion debe ser un numero entero.
+                        </div>
                       </div>
                       <div class="mb-3 col-md-8">
                         <label for="description" class="form-label">Descripcion</label>
-                        <textarea name="description" id="description" class="form-control" rows="5"></textarea>
+                        <textarea name="description" id="description" class="form-control validate" rows="5"
+                        data-validation-type="alphanumeric_space"
+                        data-validation-length="1_200"
+                        ><% if (typeof vehiculo_editar  != "undefined") { %><%- vehiculo_editar.Descripcion %><% } %></textarea>
+                        <div class="error-validacion">
+                          Email debe ser un correo electronico valido ej:prueba@gmail.com
+                        </div>
                       </div>
                       <div class="mb-3 col-md-4">
+                        <% if (typeof vehiculo_editar  != "undefined") { %>
+                          <img src="<%- vehiculo_editar.img %>" class="w-100 d-block">
+                        <% } %>
                         <label for="image" class="form-label">Imagen</label>
                         <input type="file" name="featuredImage" class="form-control" id="image">
                       </div>
@@ -156,10 +232,10 @@
                                   <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="/vehiculos/editar/<%- v.id %>"
+                                  <a class="dropdown-item" href="/admin/vehiculos/<%- v.id %>"
                                     ><i class="bx bx-edit-alt me-1"></i> Editar</a
                                   >
-                                  <a class="dropdown-item" href="/vehiculos/borrar/<%- v.id %>"
+                                  <a class="dropdown-item" href="/admin/borrar/<%- v.id %>"
                                     ><i class="bx bx-trash me-1"></i> Borrar</a
                                   >
                                 </div>

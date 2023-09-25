@@ -1,10 +1,15 @@
 form{
     .error-validacion{
-        display: none;
-        color: red;
+        font-size: 13px;
+        color: transparent;
+        transition: all 0.2s;
+        height: 20px;
+
     }
     .error-validacion.activo{
-        display: block;
+        color: red;
+        height: 40px;
+
     }
 
 }

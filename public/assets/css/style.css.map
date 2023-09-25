@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../scss/general.scss","../scss/alquiler.scss"],"names":[],"mappings":"AACI;EACI;EACA;;AAEJ;EACI;;;ACJA;EACI;EACA","file":"style.css"}
+{"version":3,"sourceRoot":"","sources":["../scss/general.scss","../scss/alquiler.scss"],"names":[],"mappings":"AACI;EACI;EACA;EACA;EACA;;AAGJ;EACI;EACA;;;ACRA;EACI;EACA","file":"style.css"}

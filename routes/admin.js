@@ -7,7 +7,9 @@ let reservasController = require('../controller/reservas');
 let userRolValidation = require("../middlewares/userRolValidation");
 
 router.get('/vehiculos',userRolValidation("administrador"),vehiculosController.create);
+router.get('/vehiculos/:id',userRolValidation("administrador"),vehiculosController.edit);
 router.post('/vehiculos',userRolValidation("administrador"),vehiculosController.store);
+router.put('/vehiculos/:id',userRolValidation("administrador"),vehiculosController.update);
 router.get('/eventos',userRolValidation("administrador"),eventosController.create);
 router.post('/eventos',userRolValidation("administrador"),eventosController.store);
 router.get('/reservas',userRolValidation("administrador"),reservasController.create);

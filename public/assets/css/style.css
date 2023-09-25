@@ -1,9 +1,12 @@
 form .error-validacion {
-  display: none;
-  color: red;
+  font-size: 13px;
+  color: transparent;
+  transition: all 0.2s;
+  height: 20px;
 }
 form .error-validacion.activo {
-  display: block;
+  color: red;
+  height: 40px;
 }
 
 #alquiler2 #calendar-wrapper .day[disabled] {
