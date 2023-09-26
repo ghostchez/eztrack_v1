@@ -3,21 +3,22 @@ const {usuarios,roles} = require("../database/models");
 
 let usuariosController = {
     create: async (req, res) => {
+        let status = req.query.status ?? null;
         let lista_roles = await roles.findAll();
         let lista_usuarios = await usuarios.findAll();
-        res.render("./usuarios",{sess:req.session,tab:"gestion",title:"usuarios",lista_roles,lista_usuarios});
+        res.render("./usuarios",{sess:req.session,tab:"gestion",title:"usuarios",lista_roles,lista_usuarios,status});
     },
     store: async (req, res) => {
         try {
             let {firstName,lastName,password,password2,email,phoneNumber,rol} = req.body;
 
             if(password != password2){
-                res.redirect("/admin/usuarios?result=error");
+                res.redirect("/admin/usuarios?status=password");
                 throw "error";
             }
             let resultado = await usuarios.create({nombre:firstName+" "+lastName,email,password,telefono:phoneNumber,idRol:rol})
             if(resultado){
-                res.redirect("/admin/usuarios?result=success");
+                res.redirect("/admin/usuarios?status=success");
             }
         } catch (error) {
             console.log(error)

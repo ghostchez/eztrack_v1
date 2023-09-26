@@ -57,7 +57,7 @@
                 <div class="card-body">
                   <form id="formAccountSettings" class="form-validate" method="POST"
                   <% if (typeof vehiculo_editar  != "undefined") { %>
-                    action="/admin/vehiculos/1?_method=PUT"  
+                    action="/admin/vehiculos/<%- vehiculo_editar.id %>?_method=PUT"  
                   <% }else{ %>
                     action="/admin/vehiculos/" 
                   <% } %>
@@ -201,11 +201,11 @@
                       <div class="mb-3 col-md-8">
                         <label for="description" class="form-label">Descripcion</label>
                         <textarea name="description" id="description" class="form-control validate" rows="5"
-                        data-validation-type="alphanumeric_space"
+                        data-validation-type="text"
                         data-validation-length="0_200"
                         ><% if (typeof vehiculo_editar  != "undefined") { %><%- vehiculo_editar.Descripcion %><% } %></textarea>
                         <div class="error-validacion">
-                          Maxima cantidad de caracteres para la descripcion es 200.
+                          Maxima cantidad de caracteres para la descripcion es 200. Espacios, comas , puntos , dos puntos permitido.
                         </div>
                       </div>
                       <div class="mb-3 col-md-4">

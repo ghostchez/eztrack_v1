@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      reservas.belongsTo(models.opcion_alquileres,{foreignKey:"idOpcionAlquiler"});
-      reservas.belongsTo(models.vehiculos,{foreignKey:"idVehiculo"});
-      reservas.belongsTo(models.eventos,{foreignKey:"idEvento"});
-      reservas.belongsTo(models.usuarios,{foreignKey:"idUsuario"});
+      reservas.belongsTo(models.opcion_alquileres,{foreignKey:"idOpcionAlquiler",as:"opcion"});
+      reservas.belongsTo(models.vehiculos,{foreignKey:"idVehiculo",as:"vehiculo"});
+      reservas.belongsTo(models.eventos,{foreignKey:"idEvento",as:"evento"});
+      reservas.belongsTo(models.usuarios,{foreignKey:"idUsuario",as:"usuario"});
     }
   }
   reservas.init({

@@ -37,34 +37,17 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
+                      <% reservas_list.forEach(r => { %>
                       <tr>
-                        <td> <strong>1</strong></td>
-                        <td>Miriam12</td>
-                        <td>Tesla P3</td>
-                        <td>12</td>
-                        <td>Redbull 2023 invierno</td>
-                        <td>20/08/2023</td>
-                        <td>12.000$</td>
+                        <td> <strong><%- r.id %></strong></td>
+                        <td><%- (r.usuario)? r.usuario.dataValues.nombre : "-" %></td>
+                        <td><%- (r.vehiculo)? r.vehiculo.dataValues.modelo+" "+r.vehiculo.dataValues.marca  : "-"  %></td>
+                        <td><%- (r.opcion)? r.opcion.dataValues.cantidadVueltas : "-" %></td>
+                        <td><%- (r.evento)? r.evento.dataValues.nombre_evento : "-" %></td>
+                        <td><%- r.createdAt %></td>
+                        <td><%- r.subtotal %>$</td>
                       </tr>
-                      <tr>
-                        <td> <strong>1</strong></td>
-                        <td>Miriam12</td>
-                        <td>Tesla P3</td>
-                        <td>12</td>
-                        <td>Redbull 2023 invierno</td>
-                        <td>20/08/2023</td>
-                        <td>12.000$</td>
-                      </tr>
-                      <tr>
-                        <td> <strong>1</strong></td>
-                        <td>Miriam12</td>
-                        <td>Tesla P3</td>
-                        <td>12</td>
-                        <td>Redbull 2023 invierno</td>
-                        <td>20/08/2023</td>
-                        <td>12.000$</td>
-                      </tr>
-
+                      <% }); %>
                     </tbody>
                   </table>
                 </div>

@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       usuarios.belongsTo(models.roles,{foreignKey:"idRol",as:"rol",targetKey:"id"})
+      usuarios.hasOne(models.reservas,{foreignKey:"idUsuario"})
     }
   }
   usuarios.init({

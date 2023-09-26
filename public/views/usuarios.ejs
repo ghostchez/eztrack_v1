@@ -7,6 +7,39 @@
       <!-- Menu -->
       <%- include("./partials/header") %>
       <!-- / Menu -->
+      <% if (status != "undefined" && status == "password") { %>
+        <script>
+          window.addEventListener('load', function () {
+              Swal.fire(
+              'Error !',
+              'La contraseña deben ser iguales.',
+              'error'
+            )
+          })
+        </script>
+        <% } %>
+      <% if (status != "undefined" && status == "success" && typeof vehiculo_editar  != "undefined") { %>
+        <script>
+          window.addEventListener('load', function () {
+              Swal.fire(
+              'Modificacion exitosa!',
+              'Usuario editado correctamente.',
+              'success'
+            )
+          })
+        </script>
+        <% } %>
+        <% if (status != "undefined" && status == "success" && typeof vehiculo_editar  == "undefined") { %>
+          <script>
+            window.addEventListener('load', function () {
+                Swal.fire(
+                  'Alta exitosa!',
+                  'Usuario nuevo ingresado correctamente.',
+                  'success'
+              )
+            })
+          </script>
+          <% } %>
 
 
     <!-- Layout container -->
@@ -120,7 +153,7 @@
                           name="phoneNumber"
                           class="form-control validate"
                           placeholder=""
-                          data-validation-type="numeric"
+                          data-validation-type="number"
                           data-validation-length="5_35"
                         />
                         <div class="error-validacion">
@@ -174,9 +207,8 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/admin/usuarios/<%- usuario.id %>">
-                                  <i class="bx bx-edit-alt me-1"></i> Editar</a
-                                >
+                                <!--<a class="dropdown-item" href="/admin/usuarios/<%- usuario.id %>">
+                                  <i class="bx bx-edit-alt me-1"></i> Editar</a>-->
                               </div>
                             </div>
                           </td>
