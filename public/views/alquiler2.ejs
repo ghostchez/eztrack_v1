@@ -38,7 +38,7 @@
                         <div class="mb-3 row">
                             <div class="col-md-3">
                                 <h5 class="mb-1"><%- vehiculo.marca %> <%- vehiculo.modelo %></h5>
-                                <img src="/assets/image_vehiculos/<%- vehiculo.img %>" style="border-radius: 4px;" class="w-75" alt="">
+                                <img  src="/assets/image_vehiculos/<%- v.img %>" onerror="if (this.src != '/assets/img/default-car.png') this.src = '/assets/img/default-car.png';" style="border-radius: 4px;" class="w-75" alt="">
                             </div>
                             <div class="col-md-5 pt-4">
                               <p><%- vehiculo.descripcion %></p>

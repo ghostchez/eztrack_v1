@@ -17,75 +17,114 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
+          <% if (typeof usuario_editar  != "undefined") { %>
+            <a href="/admin/usuarios" class="btn-volver"> 
+              <i class='bx bx-arrow-back' ></i>Volver alta</a>
+           <% } %>
           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Usuarios</h4>
-
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-4">
-                <h5 class="card-header">Alta Usuarios</h5>
+                
+                <% if (typeof usuario_editar  != "undefined") { %>
+                  <h5 class="card-header">Editar Usuario</h5>
+                 <% } else{ %>
+                  <h5 class="card-header">Alta Usuario</h5>
+                <% } %>
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" method="POST" action="/admin/usuarios">
+                  <form id="formAccountSettings" autofill="off" autocomplete="off" class="form-validate" method="POST"
+                  <% if (typeof vehiculo_editar  != "undefined") { %>
+                    action="/admin/usuarios/1?_method=PUT"  
+                  <% }else{ %>
+                    action="/admin/usuarios/" 
+                  <% } %>>
                     <div class="row">
                       <div class="mb-3 col-md-6">
                         <label for="firstName" class="form-label">Nombre</label>
                         <input
-                          class="form-control"
+                          class="form-control validate"
                           type="text"
                           id="firstName"
                           name="firstName"
                           value=""
+                          data-validation-type="text"
+                          data-validation-length="1_30"
                           autofocus
                         />
+                        <div class="error-validacion">
+                          Nombre debe ser solo texto , admite espacio, entre 1 y 30 caracteres
+                        </div>
                       </div>
                       <div class="mb-3 col-md-6">
                         <label for="lastName" class="form-label">Apellido</label>
-                        <input class="form-control" type="text" name="lastName" id="lastName" value="" />
+                        <input class="form-control validate" type="text" name="lastName" id="lastName" value="" 
+                        data-validation-type="text"
+                        data-validation-length="1_30"/>
+                        <div class="error-validacion">
+                          Apellido debe ser solo texto , admite espacio, entre 1 y 30 caracteres
+                        </div>
                       </div>
                       <div class="mb-3 col-md-6">
                         <label for="password" class="form-label">Password</label>
                         <input
-                          class="form-control"
+                          class="form-control validate"
                           type="password"
-                          autocomplete="off"
                           id="password"
                           name="password"
+                          autocomplete="new-password"
                           placeholder=""
+                          data-validation-type="password"
+                          data-validation-length="5_25"
                         />
+                        <div class="error-validacion">
+                          Contraseña debe ser entre 5 y 25 caracteres,debe tener letras y numeros.
+                        </div>
                       </div>
                       <div class="mb-3 col-md-6">
                         <label for="password2" class="form-label">Repetir Password</label>
                         <input
                           type="password"
-                          autocomplete="off"
-                          class="form-control"
+                          class="form-control validate"
                           id="password2"
                           name="password2"
+                          data-validation-type="password"
+                          data-validation-length="5_25"
                         />
+                        <div class="error-validacion">
+                          Repetir Contraseña debe ser entre 5 y 25 caracteres,debe tener letras y numeros.
+                        </div>
                       </div>
                       <div class="mb-3 col-md-6">
                         <label class="form-label" for="email">Email</label>
-                        <div class="input-group input-group-merge">
-                          <input
-                            type="text"
-                            id="email"
-                            name="email"
-                            class="form-control"
-                            placeholder="ejemplo@gmail.com"
-                          />
+                        <input
+                          type="text"
+                          id="email"
+                          name="email"
+                          autocomplete="new-email"
+                          class="form-control validate"
+                          placeholder="ejemplo@gmail.com"
+                          data-validation-type="email"
+                          data-validation-length="1_35"
+                        />
+                        <div class="error-validacion">
+                          Email debe ser valido
                         </div>
                       </div>
                       <div class="mb-3 col-md-6">
                         <label class="form-label" for="phoneNumber">Telefono</label>
-                        <div class="input-group input-group-merge">
-                          <input
-                            type="number"
-                            id="phoneNumber"
-                            name="phoneNumber"
-                            class="form-control"
-                            placeholder=""
-                          />
+                        <input
+                          type="number"
+                          id="phoneNumber"
+                          name="phoneNumber"
+                          class="form-control validate"
+                          placeholder=""
+                          data-validation-type="numeric"
+                          data-validation-length="5_35"
+                        />
+                        <div class="error-validacion">
+                          Telefono debe ser solo numerico entre 5 y 35 de longitud.
                         </div>
                       </div>
                       <div class="mb-3 col-md-6">

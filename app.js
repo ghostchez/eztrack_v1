@@ -65,9 +65,6 @@ app.set('trust proxy', 1) // trust first proxy
 app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'ejs');
 
-/*app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-*/
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -130,11 +127,11 @@ app.use(function(err, req, res, next) {
 
 app.post("/admin/vehiculos", upload.single("featuredImage"), (req, res,next) => {
   if (req.file) next();
-  else res.status(404).send("Please upload a valid image");
+  else next();
 });
 app.put("/admin/vehiculos/:id", upload.single("featuredImage"), (req, res,next) => {
   if (req.file) next();
-  else res.status(404).send("Please upload a valid image");
+  else next();
 });
 
 app.use('/', indexRouter);
@@ -142,6 +139,8 @@ app.use('/usuarios', usuariosRouter);
 app.use('/admin', adminRouter);
 app.use('/servicios', serviciosRouter);
 
-
+app.use((req, res, next) => {
+  res.redirect("/servicios/alquiler");
+})
 
 module.exports = app;

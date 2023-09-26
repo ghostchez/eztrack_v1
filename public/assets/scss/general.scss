@@ -13,3 +13,16 @@ form{
     }
 
 }
+.btn-volver{
+    background-color: rgb(255, 200, 0);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 6px 7px;
+}
+table.table-list .thumbnail{
+    object-fit: cover;
+    object-position: center;
+    width: 45px;
+    height: 45px;
+}

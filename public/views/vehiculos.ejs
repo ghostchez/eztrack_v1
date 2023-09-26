@@ -1,5 +1,26 @@
 <%- include("./partials/head") %>
-
+<% if (status != "undefined" && status == "success" && typeof vehiculo_editar  != "undefined") { %>
+<script>
+  window.addEventListener('load', function () {
+      Swal.fire(
+      'Modificacion exitosa!',
+      'Vehiculo editado correctamente.',
+      'success'
+    )
+  })
+</script>
+<% } %>
+<% if (status != "undefined" && status == "success" && typeof vehiculo_editar  == "undefined") { %>
+  <script>
+    window.addEventListener('load', function () {
+        Swal.fire(
+          'Alta exitosa!',
+          'Vehiculo nuevo ingresado correctamente.',
+          'success'
+      )
+    })
+  </script>
+  <% } %>
 <body>
     <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
@@ -16,6 +37,10 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
+          <% if (typeof vehiculo_editar  != "undefined") { %>
+            <a href="/admin/vehiculos" class="btn-volver"> 
+              <i class='bx bx-arrow-back' ></i>Volver alta</a>
+           <% } %>
           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Vehiculos</h4>
 
           <div class="row">
@@ -177,18 +202,19 @@
                         <label for="description" class="form-label">Descripcion</label>
                         <textarea name="description" id="description" class="form-control validate" rows="5"
                         data-validation-type="alphanumeric_space"
-                        data-validation-length="1_200"
+                        data-validation-length="0_200"
                         ><% if (typeof vehiculo_editar  != "undefined") { %><%- vehiculo_editar.Descripcion %><% } %></textarea>
                         <div class="error-validacion">
-                          Email debe ser un correo electronico valido ej:prueba@gmail.com
+                          Maxima cantidad de caracteres para la descripcion es 200.
                         </div>
                       </div>
                       <div class="mb-3 col-md-4">
-                        <% if (typeof vehiculo_editar  != "undefined") { %>
-                          <img src="<%- vehiculo_editar.img %>" class="w-100 d-block">
-                        <% } %>
+                        
                         <label for="image" class="form-label">Imagen</label>
                         <input type="file" name="featuredImage" class="form-control" id="image">
+                        <% if (typeof vehiculo_editar  != "undefined") { %>
+                          <img src="/assets/image_vehiculos/<%- vehiculo_editar.img %>" onerror="if (this.src != '/assets/img/default-car.png') this.src = '/assets/img/default-car.png';"  class="w-75 mx-auto d-block" >
+                        <% } %>
                       </div>
 
                     </div>
@@ -205,10 +231,11 @@
               <% if (vehiculos_list.length > 0) { %>
                 <div class="card">
                   <div class="table-responsive text-nowrap">
-                    <table class="table">
+                    <table class="table table-list">
                       <thead>
                         <tr>
                           <th>Id</th>
+                          <th style="padding-left: 34px;"><i class='bx bxs-camera'></i></th>
                           <th>Modelo</th>
                           <th>Marca</th>
                           <th>Potencia</th>
@@ -221,6 +248,7 @@
                         <% vehiculos_list.forEach(v => { %>
                           <tr>
                             <td> <strong><%- v.id %></strong></td>
+                            <td><img src="/assets/image_vehiculos/<%- v.img %>" onerror="if (this.src != '/assets/img/default-car.png') this.src = '/assets/img/default-car.png';" class="thumbnail" ></td>
                             <td><%- v.modelo %></td>
                             <td><%- v.marca %></td>
                             <td><%- v.potencia %></td>

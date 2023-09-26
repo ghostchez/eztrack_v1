@@ -6,8 +6,9 @@ const {usuarios,vehiculos,eventos,reservas,opcion_alquileres} = require("../data
 let vehiculosController = {
     create:async (req,res) =>{
         try {
+            let status = req.query.status ?? null;
             let vehiculos_list = await vehiculos.findAll();
-            res.render("./vehiculos",{sess:req.session,tab:"gestion",title:"vehiculos",vehiculos_list});
+            res.render("./vehiculos",{sess:req.session,tab:"gestion",title:"vehiculos",vehiculos_list,status});
         } catch (error) {
             console.log(error)
         }
@@ -18,15 +19,14 @@ let vehiculosController = {
             let result = await vehiculos.create({
                 modelo:model,marca:brand,traccion:traction,año:year,potencia:power,peso:weight,nivel:level,descripcion:description,precio_vuelta:lap_price
             });
-            console.log("aca");
 
             if(result){
                 let update_image = await vehiculos.update({img:req.file.filename},{where:{id:result.id}});
-                res.redirect("/admin/vehiculos?result=success");
+                res.redirect("/admin/vehiculos?status=success");
 
             }
             else{
-                res.redirect("/admin/vehiculos?result=error");
+                res.redirect("/admin/vehiculos?status=error");
             }
         }
         catch(error){
@@ -34,10 +34,12 @@ let vehiculosController = {
     },
     edit:async (req,res) =>{
         try {
+            let status = req.query.status ?? null;
+
             let {id} = req.params;
             let vehiculos_list = await vehiculos.findAll();
             let vehiculo_editar = await vehiculos.findOne({where:{id}});
-            res.render("./vehiculos",{sess:req.session,tab:"gestion",title:"vehiculos",vehiculos_list,vehiculo_editar});
+            res.render("./vehiculos",{sess:req.session,tab:"gestion",title:"vehiculos",vehiculos_list,vehiculo_editar,status});
         } catch (error) {
             console.log(error)
         }
@@ -50,14 +52,17 @@ let vehiculosController = {
                 modelo:model,marca:brand,traccion:traction,año:year,potencia:power,peso:weight,nivel:level,descripcion:description,precio_vuelta:lap_price
             },{where:{id}});
             if(result){
-                let update_image = await vehiculos.update({img:req.file.filename},{where:{id:result.id}});
-                res.redirect("/admin/vehiculos?result=success");
+                if(typeof req.file != "undefined"){
+                    let update_image = await vehiculos.update({img:req.file.filename},{where:{id:result[0]}});
+                }
+                res.redirect("/admin/vehiculos/"+id+"?status=success");
             }
             else{
-                res.redirect("/admin/vehiculos?result=error");
+                res.redirect("/admin/vehiculos/"+id+"?status=error");
             }
         }
         catch(error){
+            console.log(error)
         }
     },
 }

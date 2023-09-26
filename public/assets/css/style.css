@@ -9,6 +9,21 @@ form .error-validacion.activo {
   height: 40px;
 }
 
+.btn-volver {
+  background-color: rgb(255, 200, 0);
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 6px 7px;
+}
+
+table.table-list .thumbnail {
+  object-fit: cover;
+  object-position: center;
+  width: 45px;
+  height: 45px;
+}
+
 #alquiler2 #calendar-wrapper .day[disabled] {
   background-color: rgba(237, 237, 237, 0.55);
   border-radius: 3px;

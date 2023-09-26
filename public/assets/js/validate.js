@@ -38,6 +38,15 @@ function ValidateAlphanumeric_space(text,min = false,max = false)
         return false
     }
 }
+function ValidateText(text,min = false,max = false) 
+{
+    let regex = new RegExp('^([a-zA-Z ]){'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
+    if (regex.test(text.trimEnd())){
+        return true
+    }else{
+        return false
+    }
+}
 function ValidateNumber(number,min = false,max = false) 
 {
     let regex = new RegExp('^([0-9]){'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
@@ -77,6 +86,8 @@ forms.forEach(form => {
                 validacion_resultado = ValidateAlphanumeric_space(field.value,min_max[0],min_max[1]);
             else if(type == "alphanumeric") 
                 validacion_resultado = ValidateAlphanumeric(field.value,min_max[0],min_max[1]);
+            else if(type == "text") 
+                validacion_resultado = ValidateText(field.value,min_max[0],min_max[1]);
             
             obj_resultados[field.id] = validacion_resultado;
         });
