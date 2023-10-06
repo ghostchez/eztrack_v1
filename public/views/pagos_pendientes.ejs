@@ -1,0 +1,55 @@
+<%- include("./partials/head") %>
+
+<body>
+    <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <!-- Menu -->
+      <%- include("./partials/header") %>
+      <!-- / Menu -->
+
+    <!-- Layout container -->
+    <div class="layout-page">
+
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Pagos pendientes</h4>
+
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="fw-bold py-3 mb-4"> Pagos pendientes</h4>
+              <!-- Basic Bootstrap Table -->
+              <div class="card">
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>total</th>
+                        <th>Usuario</th>
+                        <th>Metodo</th>
+                        <th>Fecha</th>
+                        <th>Accion</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <% pagos_pendientes_list.forEach(p => { %>
+                      <tr>
+                        <td> <strong><%- p.id %></strong></td>
+                        <td><%- (p.total)? p.usuario.dataValues.nombre : "-" %></td>
+                        <td><%- (p.usuario.dataValues.nombre)? p.usuario.dataValues.nombre : "-"  %></td>
+                        <td><%- (p.metodo)? p.metodo : "-" %></td>
+                        <td><%- (p.createdAt)? p.createdAt : "-" %></td>
+                        <td><button> Confirmar pago </button></td>
+                      </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            <!-- / Content -->
+
+<%- include("./partials/footer") %>

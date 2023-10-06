@@ -4,6 +4,7 @@ let vehiculosController = require("../controller/vehiculos");
 let eventosController = require("../controller/eventos");
 let usuariosController = require('../controller/usuarios');
 let reservasController = require('../controller/reservas');
+let pagosPendientesController = require('../controller/pagos_pendientes');
 let userRolValidation = require("../middlewares/userRolValidation");
 
 router.get('/vehiculos',userRolValidation("administrador"),vehiculosController.create);
@@ -14,6 +15,7 @@ router.get('/eventos',userRolValidation("administrador"),eventosController.creat
 router.post('/eventos',userRolValidation("administrador"),eventosController.store);
 router.get('/reservas',userRolValidation("administrador"),reservasController.create);
 router.get('/usuarios',userRolValidation("administrador"),usuariosController.create);
+router.get('/pagos_pendientes',userRolValidation("administrador"),pagosPendientesController.lista);
 router.post('/usuarios',userRolValidation("administrador"),usuariosController.store);
 
 
