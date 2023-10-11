@@ -1,5 +1,15 @@
 <%- include("./partials/head") %>
-
+<% if (status != "undefined" && status == "acceso_denegado") { %>
+  <script>
+    window.addEventListener('load', function () {
+        Swal.fire(
+          'Acceso denegado!',
+          'No posee el rol necesario para realizar la accion.',
+          'error'
+      )
+    })
+  </script>
+  <% } %>
 <body>
     <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">

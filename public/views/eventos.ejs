@@ -1,5 +1,15 @@
 <%- include("./partials/head") %>
-
+<% if (status != "undefined" && status == "deleted" && typeof vehiculo_editar  == "undefined") { %>
+  <script>
+    window.addEventListener('load', function () {
+        Swal.fire(
+          'Baja exitosa!',
+          'Evento borrado.',
+          'success'
+      )
+    })
+  </script>
+  <% } %>
 <body>
     <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
@@ -171,9 +181,9 @@
                                 <a class="dropdown-item" href="/admin/eventos">
                                   <i class="bx bx-edit-alt me-1"></i> Editar</a
                                 >
-                                <a class="dropdown-item" href="javascript:void(0);">
-                                  <i class="bx bx-trash me-1"></i> Borrar</a
-                                >
+                                <button type="button" class="dropdown-item" onClick="clickBorrarEvento('<%- eve.nombre_evento %>','<%- eve.nombre_autodromo %>','<%- eve.id %>')" data-bs-toggle="modal" data-bs-target="#modalBorrar">
+                                  <i class="bx bx-trash me-1"></i> Borrar
+                                </button>
                               </div>
                             </div>
                           </td>
@@ -184,5 +194,31 @@
                 </div>
               </div>
             <!-- / Content -->
-
+            <script>
+              function clickBorrarEvento(evento,autodromo,id){
+                let modalBorrar = document.querySelector('#modalBorrar ');
+                modalBorrar.querySelector('.modal-body .evento_autodromo').innerHTML = evento + " " + autodromo;
+                document.querySelector('#formBorrar').action  = `/admin/eventos/${id}?_method=DELETE`;
+              }
+        
+            </script>
+            <div class="modal fade" id="modalBorrar" tabindex="-1" aria-labelledby="modalBorrarLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-danger" id="modalBorrarLabel">Borrar Evento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Esta seguro que desea borrar el evento <b class="evento_autodromo text-danger"></b>?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="formBorrar">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form action="" method="post" id="formBorrar">
+            </form>
 <%- include("./partials/footer") %>

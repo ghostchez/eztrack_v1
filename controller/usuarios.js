@@ -1,5 +1,5 @@
 const session = require("express-session");
-const {usuarios,roles} = require("../database/models");
+const {usuarios,roles,datos_pagos} = require("../database/models");
 
 let usuariosController = {
     create: async (req, res) => {
@@ -26,14 +26,56 @@ let usuariosController = {
         
     },
     mi_cuenta:(req,res)=>{
-        res.render("./mi_cuenta",{sess:req.session,tab:"usuarios",title:"mi cuenta"});
+        res.render("./mi_cuenta",{sess:req.session,tab:"usuarios",title:"Mi cuenta"});
     },
-    datos_pago:(req,res)=>{
-        res.render("./datos_pago",{sess:req.session,tab:"usuarios",title:"datos de pago"});
+    datos_pago:async(req,res)=>{
+        let sess = req.session;
+        let status = req.query.status ?? null;
+        let usuario_actual = await usuarios.findOne({where:{id:sess.idUser},include:[{model:datos_pagos,as:"datos_pago"}]});
+        let mis_datos_pago = null;
+        if(usuario_actual.datos_pago != null){
+            mis_datos_pago = usuario_actual.datos_pago;
+        }
+        res.render("./datos_pago",{sess:req.session,tab:"usuarios",title:"Mis datos de pago",status,mis_datos_pago});
     },
-    mis_ordenes:(req,res)=>{
-        res.render("./mis_ordenes",{sess:req.session,tab:"usuarios",title:"mis ordenes"});
+    guardar_datos_pago:async (req,res)=>{
+        try {
+            let sess = req.session;
+            if(typeof sess.idUser == "undefined"){
+                res.redirect("/?status=session");
+                return false;
+            }
+            let usuario_actual = await usuarios.findOne({where:{id:sess.idUser},include:[{model:datos_pagos,as:"datos_pago"}]});
+            let {address,province,dni,email,cardOwner,cardNumber,cvv,expireMonth,expireYear} = req.body;
+            if(usuario_actual.datos_pago == null){
+                let result = await datos_pagos.create({direccion:address,estado:province,dni:dni,email,titular:cardOwner,numero_tarjeta:cardNumber,cvv,vencimiento:expireMonth+"/"+expireYear});
+                if(result){
+                    let usuario_editado = await usuarios.update({idDatosPago:result.id},{where:{id:sess.idUser}});
+                    if(usuario_editado){
+                        res.redirect("/usuarios/datos_pago?status=success");
+                    }
+                }
+                else{
+                    res.redirect("/usuarios/datos_pago?status=error");
+    
+                }
+            }else{
+                let result = await datos_pagos.update({direccion:address,estado:province,dni:dni,email,titular:cardOwner,numero_tarjeta:cardNumber,cvv,vencimiento:expireMonth+"/"+expireYear},{where:{id:usuario_actual.datos_pago.dataValues.id}});
+                if(result){
+                    res.redirect("/usuarios/datos_pago?status=edit_success");
+                }else{
+                    res.redirect("/usuarios/datos_pago?status=edit_error");
+                }
+            }
+            
+        
+        } catch (error) {
+            console.log(error)
+        }
+        
     },
+    
+
     
 }
 module.exports = usuariosController;

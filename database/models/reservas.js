@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       reservas.belongsTo(models.vehiculos,{foreignKey:"idVehiculo",as:"vehiculo"});
       reservas.belongsTo(models.eventos,{foreignKey:"idEvento",as:"evento"});
       reservas.belongsTo(models.usuarios,{foreignKey:"idUsuario",as:"usuario"});
+      reservas.hasOne(models.pagos_pendientes,{foreignKey:"idReserva"})
+
     }
   }
   reservas.init({
@@ -24,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     subtotal: DataTypes.INTEGER,
     idPago: DataTypes.INTEGER,
     fecha: DataTypes.STRING,
+    status: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'reservas',

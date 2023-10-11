@@ -10,12 +10,14 @@ let userRolValidation = require("../middlewares/userRolValidation");
 router.get('/vehiculos',userRolValidation("administrador"),vehiculosController.create);
 router.get('/vehiculos/:id',userRolValidation("administrador"),vehiculosController.edit);
 router.post('/vehiculos',userRolValidation("administrador"),vehiculosController.store);
+router.delete('/vehiculos/:id',userRolValidation("administrador"),vehiculosController.delete);
 router.put('/vehiculos/:id',userRolValidation("administrador"),vehiculosController.update);
 router.get('/eventos',userRolValidation("administrador"),eventosController.create);
 router.post('/eventos',userRolValidation("administrador"),eventosController.store);
+router.delete('/eventos/:id',userRolValidation("administrador"),eventosController.delete);
 router.get('/reservas',userRolValidation("administrador"),reservasController.create);
 router.get('/usuarios',userRolValidation("administrador"),usuariosController.create);
-router.get('/pagos_pendientes',userRolValidation("administrador"),pagosPendientesController.lista);
+router.get('/pagos',userRolValidation("administrador"),pagosPendientesController.lista);
 router.post('/usuarios',userRolValidation("administrador"),usuariosController.store);
 
 

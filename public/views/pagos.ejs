@@ -1,0 +1,123 @@
+<%- include("./partials/head") %>
+
+<body>
+    <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <!-- Menu -->
+      <%- include("./partials/header") %>
+      <!-- / Menu -->
+
+    <!-- Layout container -->
+    <div class="layout-page">
+
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gestion /</span> Pagos</h4>
+
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="fw-bold py-3 mb-4"> Pagos Pendientes</h4>
+              <!-- Basic Bootstrap Table -->
+              <% if (pagos_pendientes_list.length > 0 ) { %>
+              <div class="card">
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>total</th>
+                        <th>Usuario</th>
+                        <th>Metodo</th>
+                        <th>N° de Reserva</th>
+                        <th>Fecha</th>
+                        <th>Archivo</th>
+                        <th>Accion</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <% pagos_pendientes_list.forEach(pp => { %>
+                      <tr>
+                        <td> <strong><%- pp.id %></strong></td>
+                        <td><%- (pp.total)? pp.usuario.dataValues.nombre : "-" %></td>
+                        <td><%- (pp.usuario.dataValues.nombre)? pp.usuario.dataValues.nombre : "-"  %></td>
+                        <td><%- (pp.metodo)? pp.metodo : "-" %></td>
+                        <td><b><%- (pp.reserva)? "#"+pp.reserva.dataValues.id : "-" %></b></td>
+                        <td><%- (pp.createdAt)? pp.createdAt : "-" %></td>
+                        <td>
+                          <% if (pp.archivo) { %>
+                            <a href="/assets/pagos_comprobantes/<%- pp.archivo %>" download>
+                              <% if (pp.archivo && pp.archivo.indexOf(".pdf") != -1 ) { %>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M8.267 14.68c-.184 0-.308.018-.372.036v1.178c.076.018.171.023.302.023.479 0 .774-.242.774-.651 0-.366-.254-.586-.704-.586zm3.487.012c-.2 0-.33.018-.407.036v2.61c.077.018.201.018.313.018.817.006 1.349-.444 1.349-1.396.006-.83-.479-1.268-1.255-1.268z"></path><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM9.498 16.19c-.309.29-.765.42-1.296.42a2.23 2.23 0 0 1-.308-.018v1.426H7v-3.936A7.558 7.558 0 0 1 8.219 14c.557 0 .953.106 1.22.319.254.202.426.533.426.923-.001.392-.131.723-.367.948zm3.807 1.355c-.42.349-1.059.515-1.84.515-.468 0-.799-.03-1.024-.06v-3.917A7.947 7.947 0 0 1 11.66 14c.757 0 1.249.136 1.633.426.415.308.675.799.675 1.504 0 .763-.279 1.29-.663 1.615zM17 14.77h-1.532v.911H16.9v.734h-1.432v1.604h-.906V14.03H17v.74zM14 9h-1V4l5 5h-4z"></path></svg>
+                              <% }else{ %>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M6 22h12a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zm7-18 5 5h-5V4zm-4.5 7a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 8.5 11zm.5 5 1.597 1.363L13 13l4 6H7l2-3z"></path></svg>
+                              <% } %>
+                            </a>
+                          <% }else{ %>
+                            Ningun archivo
+                          <% } %>
+                          
+                        </td>
+                        <td><button> Confirmar pago </button></td>
+                      </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <% }else{ %>
+                <p class="text-muted text-center fs-4 mb-5 mt-2 py-2 bg-light rounded-5">Ningun pago pendiente encontrado</p>
+              <% } %>
+              <h4 class="fw-bold py-3 mb-4 mt-5"> Pagos Confirmados</h4>
+              <% if (pagos_confirmados_list.length > 0 ) { %>
+              <!-- Basic Bootstrap Table -->
+              <div class="card">
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>total</th>
+                        <th>Usuario</th>
+                        <th>Metodo</th>
+                        <th>N° de Reserva</th>
+                        <th>Fecha</th>
+                        <th>Archivo</th>
+                        <th>Accion</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <% pagos_confirmados_list.forEach(pc => { %>
+                      <tr>
+                        <td> <strong><%- pc.id %></strong></td>
+                        <td><%- (pc.total)? pc.usuario.dataValues.nombre : "-" %></td>
+                        <td><%- (pc.usuario.dataValues.nombre)? pc.usuario.dataValues.nombre : "-"  %></td>
+                        <td><%- (pc.metodo)? pc.metodo : "-" %></td>
+                        <td><b><%- (pc.reserva)? "#"+pc.reserva.dataValues.id : "-" %></b></td>
+                        <td><%- (pc.createdAt)? pc.createdAt : "-" %></td>
+                        <td>
+                          <a href="/assets/pagos_comprobantes/<%-(pc.comprobante)? pc.comprobante : "-" %>" download>
+                            <% if (pc.comprobante && pc.comprobante.indexOf(".pdf") != -1 ) { %>
+                              <box-icon type='solid' name='file-image'></box-icon>
+                            <% }else{ %>
+                              <box-icon name='file-pdf' type='solid' ></box-icon>
+                            <% } %>
+                          </a>
+                        </td>
+                        <td><button> Confirmar pago </button></td>
+                      </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                  
+                </div>
+              </div>
+              <% }else{ %>
+                <p class="text-muted text-center fs-4 mb-5 mt-2 py-2 bg-light rounded-5">Ningun pago confirmado encontrado</p>
+              <% } %>
+            <!-- / Content -->
+
+<%- include("./partials/footer") %>

@@ -6,3 +6,72 @@
         }
     }
 }
+#alquiler4{
+    #form_datos{
+        display: none;
+    }
+    #form_datos.active{
+        display: flex;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+    #form_mis_datos.active{
+        background-color: rgba(42, 124, 255, 0.052);
+        border-radius: 12px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        display: flex;
+    }
+    #form_mis_datos{
+        display: none;
+    }
+    table#evento-detalle{
+        th{
+            background-color: rgb(215, 215, 215);
+            color: rgb(40, 40, 40);
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        td{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-bottom-width:0px;
+        }
+    }
+    table#opciones-detalle{
+        th{
+            background-color: rgba(35, 63, 84, 0.507);
+            color: white;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-left: 1px white solid;
+            border-right: 1px white solid;
+        }
+        td{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-bottom-width:0px;
+        }
+    }
+    #calendar-detalle{
+        .prev-button,.next-button{
+            display: none;
+        }
+        .week{
+            margin: 0px 0px;
+        }
+        .day span {
+            font-size: 13px;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .special-buttons{
+            display: none;
+        }
+        .buttons-container{
+            margin-bottom: 0px;
+            padding-bottom: 3px;
+        }
+    }
+}

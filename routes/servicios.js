@@ -5,13 +5,12 @@ let userRolValidation = require("../middlewares/userRolValidation");
 
 router.get('/alquiler'/*,userRolValidation("administrador")*/,alquileresController.alquiler);
 
-router.get('/alquiler2/:id'/*,userRolValidation("administrador")*/,alquileresController.alquiler2);
-router.post('/alquiler_paso2'/*,userRolValidation("administrador")*/,alquileresController.alquiler_paso2);
-
-router.get('/alquiler3/:id'/*,userRolValidation("administrador")*/,alquileresController.alquiler3);
-router.post('/alquiler_paso3'/*,userRolValidation("administrador")*/,alquileresController.alquiler_paso3);
-
-router.get('/alquiler4/:id'/*,userRolValidation("administrador")*/,alquileresController.alquiler4);
+router.get('/alquiler2/:id',userRolValidation("any"),alquileresController.alquiler2);
+router.post('/alquiler_paso2',userRolValidation("any"),alquileresController.alquiler_paso2);
+router.get('/alquiler3/:id',userRolValidation("any"),alquileresController.alquiler3);
+router.post('/alquiler_paso3',userRolValidation("any"),alquileresController.alquiler_paso3);
+router.get('/alquiler4/:id',userRolValidation("any"),alquileresController.alquiler4);
+router.post('/alquiler_paso4/:id',userRolValidation("any"),alquileresController.alquiler_paso4);
 
 
 

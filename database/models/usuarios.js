@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       usuarios.belongsTo(models.roles,{foreignKey:"idRol",as:"rol",targetKey:"id"})
+      usuarios.belongsTo(models.datos_pagos,{foreignKey:"idDatosPago",as:"datos_pago",targetKey:"id"})
       usuarios.hasOne(models.reservas,{foreignKey:"idUsuario"})
       usuarios.hasOne(models.pagos_pendientes,{foreignKey:"idUsuario"})
-
     }
   }
   usuarios.init({
@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     telefono: DataTypes.INTEGER,
     idRol: DataTypes.INTEGER,
+    idDatosPago: DataTypes.INTEGER,
     identidadVerificada: DataTypes.INTEGER,
   }, {
     sequelize,

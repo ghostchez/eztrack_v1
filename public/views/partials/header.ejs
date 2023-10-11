@@ -1,125 +1,141 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-    <div class="app-brand demo">
+  <div class="app-brand demo">
+    <a href="/" class="app-brand-link">
       <a href="/" class="app-brand-link">
-        <a href="/" class="app-brand-link">
-        <img src="/assets/img/logo_eztrack.png" class="w-100" alt="">
-      </a>
-      </a>
+      <img src="/assets/img/logo_eztrack.png" class="w-100" alt="">
+    </a>
+    </a>
 
-      <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+    </a>
+  </div>
+
+  <div class="menu-inner-shadow"></div>
+
+  <ul class="menu-inner py-1">
+    <!-- Dashboard -->
+    <li class="menu-item">
+      <a href="/" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <div data-i18n="Analytics">Panel</div>
       </a>
-    </div>
-
-    <div class="menu-inner-shadow"></div>
-
-    <ul class="menu-inner py-1">
-      <!-- Dashboard -->
+    </li>
+    <% if (!sess.nombre) { %>
       <li class="menu-item">
-        <a href="/" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-home-circle"></i>
-          <div data-i18n="Analytics">Panel</div>
+        <a href="/login" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-lock"></i>
+          <div data-i18n="Analytics">Login</div>
         </a>
       </li>
-      <% if (!sess.nombre) { %>
-        <li class="menu-item">
-          <a href="/login" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-lock"></i>
-            <div data-i18n="Analytics">Login</div>
+      <% } else { %>
+      <li class="menu-item">
+        <p  class="ps-4 mx-2 my-0">
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <span data-i18n="Analytics"><%- sess.nombre %></span>
+        </p>
+      </li>
+      <li class="menu-item">
+        <a href="/logout" class="menu-link my-0">
+          <div class="text-danger" data-i18n="Analytics">Cerrar Sesión</div>
+        </a>
+      </li>
+    <% } %>
+    
+
+    <li class="menu-header small text-uppercase">
+      <span class="menu-header-text">Landing</span>
+    </li>
+    <% if (sess && sess.rol == "administrador" || sess.rol == "atencion al cliente") { %>
+        <li class="menu-item <% if(tab == "gestion"){%> active open <%}%>  ">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-dock-top"></i>
+            <div data-i18n="Account Settings">Gestion</div>
+          </a>
+          <ul class="menu-sub">
+          <% if (sess.rol == "administrador") { %>
+            <li class="menu-item <% if(title == "vehiculos"){%> active <%}%> ">
+              <a href="/admin/vehiculos/" class="menu-link ">
+                <div data-i18n="Account">Vehiculos</div>
+              </a>
+            </li>
+            <li class="menu-item <% if(title == "eventos"){%> active <%}%>">
+              <a href="/admin/eventos/" class="menu-link ">
+                <div data-i18n="Account">Eventos</div>
+              </a>
+            </li>
+            <li class="menu-item <% if(title == "reservas"){%> active <%}%>">
+              <a href="/admin/reservas/" class="menu-link">
+                <div data-i18n="Notifications">Reservas</div>
+              </a>
+            </li>
+          <% } %>
+          <% if (sess.rol == "administrador" || sess.rol == "atencion al cliente") { %>
+            <li class="menu-item <% if(title == "pagos"){%> active <%}%>">
+              <a href="/admin/pagos/" class="menu-link">
+                <div data-i18n="Notifications">Pagos</div>
+              </a>
+            </li>
+          <% } %>
+          <% if (sess.rol == "administrador") { %>
+            <li class="menu-item <% if(title == "usuarios"){%> active <%}%>">
+              <a href="/admin/usuarios/" class="menu-link">
+                <div data-i18n="Connections">Usuarios</div>
+              </a>
+            </li>
+          <% } %>
+        </ul>
+      </li>
+    <% } %>
+    <% if (sess && sess.rol == "administrador" || sess.rol == "cliente") { %>
+    <li class="menu-item <% if(tab == "usuarios"){%> active open <%}%> ">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+        <div data-i18n="Account Settings">Usuarios</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item <% if(title == "mi cuenta"){%> active <%}%> ">
+          <a href="/usuarios/mi_cuenta" class="menu-link">
+            <div data-i18n="Account">Mi cuenta</div>
           </a>
         </li>
-        <% } else { %>
-        <li class="menu-item">
-          <p  class="ps-4 mx-2 my-0">
-            <i class="menu-icon tf-icons bx bx-user"></i>
-            <span data-i18n="Analytics"><%- sess.nombre %></span>
-          </p>
-        </li>
-        <li class="menu-item">
-          <a href="/logout" class="menu-link my-0">
-            <div class="text-danger" data-i18n="Analytics">Cerrar Sesión</div>
+        <li class="menu-item <% if(title == "datos de pago"){%> active <%}%>">
+          <a href="/usuarios/datos_pago/" class="menu-link">
+            <div data-i18n="Account">Datos de pago</div>
           </a>
         </li>
-      <% } %>
-      
-
-      <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Landing</span>
-      </li>
-      <% if (sess && sess.rol == "administrador") { %>
-      <li class="menu-item <% if(tab == "gestion"){%> active open <%}%>  ">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-dock-top"></i>
-          <div data-i18n="Account Settings">Gestion</div>
-        </a>
-        <ul class="menu-sub">
-          <li class="menu-item <% if(title == "vehiculos"){%> active <%}%> ">
-            <a href="/admin/vehiculos/" class="menu-link ">
-              <div data-i18n="Account">Vehiculos</div>
-            </a>
-          </li>
-          <li class="menu-item <% if(title == "eventos"){%> active <%}%>">
-            <a href="/admin/eventos/" class="menu-link ">
-              <div data-i18n="Account">Eventos</div>
-            </a>
-          </li>
-          <li class="menu-item <% if(title == "reservas"){%> active <%}%>">
-            <a href="/admin/reservas/" class="menu-link">
-              <div data-i18n="Notifications">Reservas</div>
-            </a>
-          </li>
-          <li class="menu-item <% if(title == "usuarios"){%> active <%}%>">
-            <a href="/admin/usuarios/" class="menu-link">
-              <div data-i18n="Connections">Usuarios</div>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <% } %>
-      <% if (sess && sess.rol == "administrador" || sess.rol == "cliente") { %>
-      <li class="menu-item <% if(tab == "usuarios"){%> active open <%}%> ">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-dock-top"></i>
-          <div data-i18n="Account Settings">Usuarios</div>
-        </a>
-        <ul class="menu-sub">
-          <li class="menu-item <% if(title == "mi cuenta"){%> active <%}%> ">
-            <a href="/usuarios/mi_cuenta" class="menu-link">
-              <div data-i18n="Account">Mi cuenta</div>
-            </a>
-          </li>
-          <!--<li class="menu-item <% if(title == "datos de pago"){%> active <%}%>">
-            <a href="/usuarios/datos_pago/" class="menu-link">
-              <div data-i18n="Account">Datos de pago</div>
-            </a>
-          </li>
-          <li class="menu-item <% if(title == "mis ordenes"){%> active <%}%>">
-            <a href="/usuarios/mis_ordenes/" class="menu-link">
-              <div data-i18n="Notifications">Mis ordenes</div>
-            </a>
-          </li>--> 
-        </ul>
-      </li>
-      <% } %>
-      <li class="menu-item <% if(tab == "servicios"){%> active open <%}%> ">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-dock-top"></i>
-          <div data-i18n="Account Settings">Servicios</div>
-        </a>
-        <ul class="menu-sub">
-          <li class="menu-item <% if(title == "alquiler paso 1" || title == "alquiler paso 2" || title == "alquiler paso 3" || title == "alquiler paso 4"){%> active <%}%> ">
-            <a href="/servicios/alquiler<%- sess.paso%>/<%- sess.idAlquiler %>" class="menu-link">
-              <div data-i18n="Account">Alquiler de vehiculos</div>
-            </a>
-          </li>
-          <!--<li class="menu-item">
-            <a href="pages-account-settings-notifications.html" class="menu-link">
-              <div data-i18n="Notifications">Contratacion de traslados</div>
-            </a>
-          </li>-->
-        </ul>
-      </li>
+        <li class="menu-item <% if(title == "mis pagos pendientes"){%> active <%}%>">
+          <a href="/usuarios/mis_pagos_pendientes/" class="menu-link">
+            <div data-i18n="Account">Mis pagos pendientes</div>
+          </a>
+        </li>
+        <!--<li class="menu-item <% if(title == "mis ordenes"){%> active <%}%>">
+          <a href="/usuarios/mis_ordenes/" class="menu-link">
+            <div data-i18n="Notifications">Mis ordenes</div>
+          </a>
+        </li>--> 
+      </ul>
+    </li>
+    <% } %>
+    <li class="menu-item <% if(tab == "servicios"){%> active open <%}%> ">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+        <div data-i18n="Account Settings">Servicios</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item <% if(title == "alquiler paso 1" || title == "alquiler paso 2" || title == "alquiler paso 3" || title == "alquiler paso 4"){%> active <%}%> ">
+          <a href="/servicios/alquiler<%- sess.paso%>/<%- sess.idAlquiler %>" class="menu-link">
+            <div data-i18n="Account">Alquiler de vehiculos</div>
+          </a>
+        </li>
+        <!--<li class="menu-item">
+          <a href="pages-account-settings-notifications.html" class="menu-link">
+            <div data-i18n="Notifications">Contratacion de traslados</div>
+          </a>
+        </li>-->
+      </ul>
+    </li>
 
 
-    </ul>
-  </aside>
+  </ul>
+</aside>

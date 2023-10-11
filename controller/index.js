@@ -12,7 +12,8 @@ let indexController = {
         
     },
     login:(req,res)=>{
-        res.render("./login",{title:"Login",error:req.query.error});
+        let status = req.query.status ?? null;
+        res.render("./login",{title:"Login",error:req.query.error,status});
     },
     logear:async (req,res)=>{
         try{

@@ -139,7 +139,7 @@
     </div>
     <!-- / Layout wrapper -->
      <!--Calendar-->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wrick17/calendar-plugin@master/theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wrick17/calendar-plugin@master/theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wrick17/calendar-plugin@master/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/wrick17/calendar-plugin@master/calendar.min.js"></script>
@@ -172,7 +172,7 @@
             date: date,
           });
           var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-          document.querySelector("#fecha").value = new Date(calendar.getSelectedDate()).toLocaleDateString( options);
+          document.querySelector("#fecha").value = new Date(calendar.getSelectedDate());
       }
       `;
       eval(configuracion);

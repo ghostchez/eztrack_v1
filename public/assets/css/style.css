@@ -24,9 +24,75 @@ table.table-list .thumbnail {
   height: 45px;
 }
 
+.fs-7 {
+  font-size: 0.75rem !important;
+}
+
 #alquiler2 #calendar-wrapper .day[disabled] {
   background-color: rgba(237, 237, 237, 0.55);
   border-radius: 3px;
+}
+
+#alquiler4 #form_datos {
+  display: none;
+}
+#alquiler4 #form_datos.active {
+  display: flex;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+#alquiler4 #form_mis_datos.active {
+  background-color: rgba(42, 124, 255, 0.052);
+  border-radius: 12px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  display: flex;
+}
+#alquiler4 #form_mis_datos {
+  display: none;
+}
+#alquiler4 table#evento-detalle th {
+  background-color: rgb(215, 215, 215);
+  color: rgb(40, 40, 40);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#alquiler4 table#evento-detalle td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom-width: 0px;
+}
+#alquiler4 table#opciones-detalle th {
+  background-color: rgba(35, 63, 84, 0.507);
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-left: 1px white solid;
+  border-right: 1px white solid;
+}
+#alquiler4 table#opciones-detalle td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom-width: 0px;
+}
+#alquiler4 #calendar-detalle .prev-button, #alquiler4 #calendar-detalle .next-button {
+  display: none;
+}
+#alquiler4 #calendar-detalle .week {
+  margin: 0px 0px;
+}
+#alquiler4 #calendar-detalle .day span {
+  font-size: 13px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+#alquiler4 #calendar-detalle .special-buttons {
+  display: none;
+}
+#alquiler4 #calendar-detalle .buttons-container {
+  margin-bottom: 0px;
+  padding-bottom: 3px;
 }
 
 /*# sourceMappingURL=style.css.map */

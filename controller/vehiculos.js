@@ -44,6 +44,15 @@ let vehiculosController = {
             console.log(error)
         }
     },
+    delete:async (req,res) =>{
+        try {
+            let id = req.params.id;
+            let vehiculo_borrar = await vehiculos.destroy({where:{id}});
+            res.redirect("/admin/vehiculos?status=deleted");
+        } catch (error) {
+            console.log(error)
+        }
+    },
     update:async (req,res,next) =>{
         try{
             let {id} = req.params;

@@ -3,8 +3,9 @@ const { Op } = require("sequelize");
 const {usuarios,vehiculos,eventos,reservas,opcion_alquileres}  = require("../database/models");
 let reservasController = {
     create:async (req, res) => {
+        let status = req.query.status ?? null;
         let eventos_list = await eventos.findAll();
-        res.render("./eventos",{sess:req.session,tab:"gestion",title:"eventos",eventos_list});
+        res.render("./eventos",{sess:req.session,tab:"gestion",title:"eventos",eventos_list,status});
     },
     store:async (req,res) =>{
         try{
@@ -21,6 +22,15 @@ let reservasController = {
             }
         }
         catch(error){
+        }
+    },
+    delete:async (req,res) =>{
+        try {
+            let id = req.params.id;
+            let eventos_deleted = await eventos.destroy({where:{id}});
+            res.redirect("/admin/eventos?status=deleted");
+        } catch (error) {
+            console.log(error)
         }
     },
 }

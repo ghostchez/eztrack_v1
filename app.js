@@ -19,7 +19,6 @@ const storageEngine = multer.diskStorage({
     cb(null, `${Date.now()}--${file.originalname}`);
   },
 });
-
 //initializing multer
 const upload = multer({
   storage: storageEngine,
@@ -29,15 +28,42 @@ const upload = multer({
   },
 });
 
+//Setting storage engine
+const storageEngine_comprobante = multer.diskStorage({
+  destination: "./public/assets/archivo_comprobante",
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}--${file.originalname}`);
+  },
+});
+//initializing multer
+const upload_comprobante = multer({
+  storage: storageEngine_comprobante,
+  limits: { fileSize: 5000000 },
+  fileFilter: (req, file, cb) => {
+    checkFileType_comprobante(file, cb);
+  },
+});
+
 const checkFileType = function (file, cb) {
   //Allowed file extensions
   const fileTypes = /jpeg|jpg|png/;
 
   //check extension names
   const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
-
   const mimeType = fileTypes.test(file.mimetype);
+  if (mimeType && extName) {
+    return cb(null, true);
+  } else {
+    return cb(null, false);
+  }
+};
+const checkFileType_comprobante = function (file, cb) {
+  //Allowed file extensions
+  const fileTypes = /pdf|jpeg|jpg|png/;
 
+  //check extension names
+  const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
+  const mimeType = fileTypes.test(file.mimetype);
   if (mimeType && extName) {
     return cb(null, true);
   } else {
@@ -133,6 +159,16 @@ app.put("/admin/vehiculos/:id", upload.single("featuredImage"), (req, res,next) 
   if (req.file) next();
   else next();
 });
+app.post("/usuarios/enviar_comprobante", upload_comprobante.single("comprobante"), (req, res,next) => {
+  if (req.file) next();
+  else next();
+});
+app.get('/assets/pagos_comprobantes/:archivo', function(req, res){
+  const file = `${__dirname}/public/assets/archivo_comprobante/${req.params.archivo}`;
+  console.log(file);
+  res.download(file); // Set disposition and send it.
+});
+
 
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);

@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       eventos.hasOne(models.reservas,{foreignKey:"idEvento"})
-    
     }
   }
   eventos.init({

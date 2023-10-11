@@ -1,12 +1,21 @@
 <%- include("./partials/head") %>
-
-<body>
+<% if (status != "undefined" && status == "ningun_datos_pago") { %>
+  <script>
+    window.addEventListener('load', function () {
+        Swal.fire(
+        'ERROR datos pago!',
+        'Ningun dato de pago cargado, ir a "mis datos de pago" para cargarlos.',
+        'error'
+      )
+    })
+  </script>
+  <% } %>
+<body id="alquiler4">
     <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
       <!-- Menu -->
 <%- include("./partials/header") %>
-
       <!-- / Menu -->
 
     <!-- Layout container -->
@@ -19,8 +28,8 @@
         <div class="container-xxl flex-grow-1 container-p-y">
           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Servicios /</span> Alquiler paso 4</h4>
 
-          <div class="row">
-            <div class="col-md-9">
+          <div class="row gx-2">
+            <div class="col-md-7">
               <div class="card mb-4">
                 <div class="d-flex align-items-center">
                   <a class="card-header" href="/servicios/alquiler2/<%- sess.idAlquiler %>">Fecha de alquiler</a> 
@@ -29,126 +38,418 @@
                   <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="currentColor" d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414Z"/></svg>
                   <a class="card-header" href="/servicios/alquiler4/<%- sess.idAlquiler %>">Pago</a>
                 </div>
-                
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" method="POST" onsubmit="return false">
+                  <form id="formAccountSettings" class="form-validate" data-validation-exception="mis_datos"  data-validation-exception-type="checkbox" method="POST" action="/servicios/alquiler_paso4/<%- id %>">
                     <div class="row px-3">
                       <div class="mb-3 col-md-12">
                         <label class="form-label mb-3">Metodo de pago</label>
                         <div class="d-flex">
-                          <div class="form-check">
-                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio1">
+                          <input name="mis_datos" type="checkbox" id="mis_datos" class="form-check-input me-2"
+                          onclick="click_mis_datos()">
+                          <label for="mis_datos">Mis datos de pago</label>
+                        </div>
+                        <hr>
+                        <div class="d-flex">
+                          <div class="form-check me-1">
+                            <input name="metodo" class="form-check-input" type="radio" value="tarjeta_credito" id="defaultRadio1">
                             <label class="form-check-label" for="defaultRadio1"> Tarjeta de credito </label>
                           </div>
-                          <div class="form-check ms-3">
-                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio2">
+                          <div class="form-check me-1">
+                            <input name="metodo" class="form-check-input" type="radio" value="transferencia_bancaria" id="defaultRadio2">
                             <label class="form-check-label" for="defaultRadio2"> Transferencia bancaria </label>
                           </div>
-                          <div class="form-check ms-3">
-                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio3">
+                          <div class="form-check me-1">
+                            <input name="metodo" class="form-check-input" type="radio" value="paypal" id="defaultRadio3">
                             <label class="form-check-label" for="defaultRadio3"> Paypal </label>
                           </div>
                         </div>
-                        
                       </div>
                       
-                      <div class="mb-3 col-md-12">
-                        <label for="email" class="form-label">Email</label>
-                        <input
-                          class="form-control"
+                      <div id="form_datos" class="row active">
+                        <h5>Ingresar datos de pago</h5>
+                        <div class="mb-3 col-md-12">
+                          <label for="province" class="form-label">Estado/Provincia</label>
+                          <input
+                          class="form-control validate"
+                          type="text"
+                          id="province"
+                          name="province"
+                          data-validation-type="text"
+                          data-validation-length="1_50"
+                          autofocus
+                          />
+                          <div class="error-validacion">
+                            Estado/Provincia debe ser alfanumerico con maximo de 50 caracteres, se admite simbolos (-/,.:"\)
+                          </div>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label for="dni" class="form-label">Documento de identidad</label>
+                          <input class="form-control validate" type="number" name="dni" id="dni" data-validation-type="number"
+                          data-validation-length="7_8" />
+                        <div class="error-validacion">
+                          DNI debe ser un numero entero entre 7 o 8 caracteres.
+                        </div>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label for="email" class="form-label">Email</label>
+                          <input
+                          class="form-control validate"
                           type="email"
                           id="email"
                           name="email"
-                          value=""
-                          autofocus
-                        />
-                      </div>
-                      <div class="mb-3 col-md-12">
-                        <label for="address" class="form-label">Direccion</label>
-                        <input
-                          class="form-control"
+                          data-validation-type="email"
+                          data-validation-length="1_50"
+                          placeholder="ejemplo@gmail.com"
+                          />
+                          <div class="error-validacion">
+                            Ingrese un email valido
+                          </div>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label for="address" class="form-label">Direccion</label>
+                          <input
+                          class="form-control validate"
                           type="text"
                           id="address"
                           name="address"
-                          value=""
+                          data-validation-type="alphanumeric_space"
+                          data-validation-length="1_50"
                           autofocus
-                        />
-                      </div>
-                      <hr class="my-3">
-                      <div class="mb-3 col-md-12">
-                        <label for="cardOwner" class="form-label">Titular</label>
-                        <input
-                          class="form-control"
+                          />
+                          <div class="error-validacion">
+                            Direccion debe ser texto y numeros con maximo de 50 caracteres, se admite espacios.
+                          </div>
+                        </div>
+                        <hr class="my-3">
+                        <div class="mb-3 col-md-12">
+                          <label for="cardOwner" class="form-label">Titular</label>
+                          <input
+                          class="form-control validate"
                           type="text"
                           id="cardOwner"
                           name="cardOwner"
-                          value=""
-                          autofocus
-                        />
-                      </div>
-                      <div class="mb-3 col-md-12">
-                        <label for="cardNumber" class="form-label">Numero de la tarjeta</label>
-                        <input
-                          class="form-control"
+                          data-validation-type="text"
+                          data-validation-length="1_30"
+                          placeholder="ENRIQUE LOPEZ"
+                          />
+                          <div class="error-validacion">
+                            Titular debe ser un texto con maximo 30 caracteres.
+                          </div>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label for="cardNumber" class="form-label">Numero de la tarjeta</label>
+                          <input
+                          class="form-control validate"
                           type="number"
                           id="cardNumber"
                           name="cardNumber"
-                          value=""
-                          autofocus
+                          data-validation-type="number"
+                          data-validation-length="16_19"
+                          placeholder="504512345678"
                         />
-                      </div>
-                      <div class="mb-3 pt-2 col-md-8">
-                        <label>Fecha de expiracion</label>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <input
-                              class="form-control"
+                        <div class="error-validacion">
+                          Numero de la tarjeta solo admite entero entre 16 y 19 caracteres.
+                        </div>
+                        </div>
+                        <div class="mb-3 pt-2 col-md-8">
+                          <label>Fecha de expiracion</label>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <input
+                              class="form-control validate"
                               type="number"
-                              id="month"
-                              name="month"
-                              value=""
-                              placeholder="mes"
-                              autofocus
-                            />
+                              id="expireMonth"
+                              name="expireMonth"
+                              data-validation-type="number"
+                              data-validation-length="2_2"
+                              placeholder="01"
+                              />
+                              <div class="error-validacion">
+                                Ingrese un mes valido, ej:09.
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <input
+                              class="form-control validate"
+                              type="number"
+                              id="expireYear"
+                              name="expireYear"
+                              data-validation-type="number"
+                              data-validation-length="2_2"
+                              placeholder="26"
+                              />
+                              <div class="error-validacion">
+                                Ingrese un año valido, ej:23.
+                              </div>
+                            </div>
                           </div>
-                          <div class="col-md-6">
-                            <input
-                              class="form-control"
-                              type="number"
-                              id="year"
-                              name="year"
-                              value=""
-                              placeholder="año"
-                              autofocus
-                            />
+                        </div>
+                        <div class="mb-3 col-md-4 ">
+                          <label for="cvv" class="form-label">CVV</label>
+                          <input
+                          class="form-control validate"
+                          type="password"
+                          id="cvv"
+                          name="cvv"
+                          data-validation-type="number"
+                          data-validation-length="3_4"
+                          placeholder="123"
+                          />
+                          <div class="error-validacion">
+                            Ingrese un cvv valido,entero entre 3 y 4 caracteres.
                           </div>
                         </div>
                       </div>
-                      <div class="mb-3 col-md-4 ">
-                        <label for="cvv" class="form-label">CVV</label>
-                        <input
-                          class="form-control"
-                          type="number"
-                          id="cvv"
-                          name="cvv"
-                          value=""
-                          placeholder="123"
-                          autofocus
-                        />
-                      </div>
+                      <div id="form_mis_datos" class="row">
+                        <h5>Mis datos de pago</h5>
+                        <div class="mb-3 col-md-12">
+                          <label for="email" class="form-label">Email</label>
+                          <input
+                            class="form-control"
+                            type="email"
+                            id="email"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.email : ''%>"
+                            autofocus
+                            disabled
+                          />
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label for="address" class="form-label">Direccion</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="address"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.direccion : ''%>"
+                            autofocus
+                            disabled
 
-                      
-                    <div class="mt-2">
-                      <button type="submit" class="btn btn-primary me-2">Continuar</button>
-                      <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                          />
+                        </div>
+                        <hr class="my-3">
+                        <div class="mb-3 col-md-12">
+                          <label for="cardOwner" class="form-label">Titular</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="cardOwner"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.titular : ''%>"
+                            autofocus
+                            disabled
+
+                          />
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label for="cardNumber" class="form-label">Numero de la tarjeta</label>
+                          <input
+                            class="form-control"
+                            type="number"
+                            id="cardNumber"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.numero_tarjeta : ''%>"
+                            autofocus
+                            disabled
+
+                          />
+                        </div>
+                        <div class="mb-3 pt-2 col-md-8">
+                          <label>Fecha de expiracion</label>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <input
+                                class="form-control"
+                                type="number"
+                                id="month"
+                                value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.vencimiento.split("/")[0] : ''%>"
+                                placeholder="mes"
+                                autofocus
+                                disabled
+
+                              />
+                            </div>
+                            <div class="col-md-6">
+                              <input
+                                class="form-control"
+                                type="number"
+                                id="year"
+                                value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.vencimiento.split("/")[1] : ''%>"
+                                placeholder="año"
+                                autofocus
+                                disabled
+
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mb-3 col-md-4 ">
+                          <label for="cvv" class="form-label">CVV</label>
+                          <input
+                            class="form-control"
+                            type="number"
+                            id="cvv"
+                            value="<%- (mis_datos_pago != null)? mis_datos_pago.dataValues.cvv : ''%>"
+                            placeholder="123"
+                            autofocus
+                            disabled
+
+                          />
+                        </div>
+                      </div>
+                      <div class="mt-2">
+                        <button type="submit" class="btn btn-primary me-2">Continuar</button>
+                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                      </div>
                     </div>
                   </form>
                 </div>
                 <!-- /Account -->
               </div>
               <!-- Basic Bootstrap Table -->
-              
-            <!-- / Content -->
+            </div>
+            <div class="col-5">
+              <div class="card">
+                <div class="card-body">
+                    <h4>Resumen</h4>
+                    <hr>
+                    <h5>Vehiculo seleccionado</h5>
+                    <!-- vehiculo -->
+                    <div class="row gx-2">
+                      <div class="col-4">
+                        <img style="width: 100%;" class="d-block mx-auto" src="/assets/image_vehiculos/<%- resumen.vehiculo.dataValues.img %>" onerror="if (this.src != '/assets/img/default-car.png') this.src = '/assets/img/default-car.png';" alt="">
+                      </div>
+                      <div class="col-8">
+                        <div class="row gx-1">
+                          <div>
+                            <p class="form-control py-1 px-2 mb-1 fs-4 text-center text-primary">
+                              <b><%- resumen.vehiculo.dataValues.modelo %> <%- resumen.vehiculo.dataValues.marca %></b>
+                            </p>
+                          </div>
+                        </div>
+                          <div class="row gx-2">
+                            <ul class="list-group col-6">
+                              <li class="list-group-item py-1 text-center">
+                                <p class="fs-7 text-secondary mb-0">Potencia</p><i class="fa-solid fa-gauge fa-lg"></i> <%- resumen.vehiculo.dataValues.potencia %> hp
+                              </li>
+                              <li class="list-group-item py-1 text-center">
+                                <p class="fs-7 text-secondary mb-0">Año</p><i class="fa-solid fa-calendar-days fa-lg"></i> <%- resumen.vehiculo.dataValues.año %>
+                              </li>
+                              <li class="list-group-item py-1 text-center">
+                                <p class="fs-7 text-secondary mb-0">Peso</p><i class="fa-solid fa-weight-hanging fa-lg"></i> <%- resumen.vehiculo.dataValues.peso %> kg
+                              </li>
+                            </ul>
+                            <ul class="list-group col-6">
+                              <li class="list-group-item py-1 text-center">
+                                <p class="fs-7 text-secondary mb-0">Nivel</p><i class="fa-solid fa-turn-up"></i> <%- resumen.vehiculo.dataValues.nivel %>
+                              </li>
+                              <li class="list-group-item py-1 text-center">
+                                <p class="fs-7 text-secondary mb-0">Traccion</p><i class="fa-solid fa-car-side"></i> <%- resumen.vehiculo.dataValues.traccion %>
+                              </li>
+                            </ul>
+                          </div>
+                          
+                      </div>
+                    </div>
+                    <!-- Fin vehiculo -->
+                    <!-- Evento -->
+                    <hr>
+                    <h5>Evento seleccionado</h5>
+                    <div class="row gx-2">
+                      <div class="col-6 px-3">
+                        <table class="table text-center" id="evento-detalle">
+                          <tbody>
+                            <tr>
+                              <th>Nombre</th>
+                            </tr>
+                            <tr>
+                              <td><%- resumen.evento.dataValues.nombre %></td>
+                            </tr>
+                            <tr>
+                              <th>Ciudad</th>
+                            </tr>
+                            <tr>
+                              <td><%- resumen.evento.dataValues.ciudad %></td>
+                            </tr>
+                            <tr>
+                              <th>Autodromo</th>
+                            </tr>
+                            <tr>
+                              <td><%- resumen.evento.dataValues.nombre_autodromo %></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-6">
+                        <div class="calendar-wrapper" id="calendar-detalle"></div>
+                      </div>
+                    </div>
+                    <hr>
+                    <h5>Opciones</h5>
+                    <div class="row gx-2">
+                      <table class="table text-center" id="opciones-detalle">
+                        <tbody>
+                          <tr>
+                            <th>Cantidad de vueltas</th>
+                            <th>Nafta incluida</th>
+                            <th>Instructor a bordo</th>
+                          </tr>
+                          <tr>
+                            <td><%- resumen.opcion.dataValues.cantidadVueltas %></td>
+                            <td><%- (resumen.opcion.dataValues.naftaIncluida == 1)? "Si" : "No" %></td>
+                            <td><%- (resumen.opcion.dataValues.instructorABordo == 1)? "Si" : "No" %></td>
+                          </tr>
+                          <tr>
+                            <th>Analisis telemetria</th>
+                            <th>Seguro premium</th>
+                            <th>Neumatico</th>
+                          </tr>
+                          <tr>
+                            <td><%- (resumen.opcion.dataValues.analisisTelemetria == 1)? "Si" : "No" %></td>
+                            <td><%- (resumen.opcion.dataValues.seguroPremium == 1)? "Si" : "No" %></td>
+                            <td><%- resumen.opcion.dataValues.compuestoNeumaticos %></td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+              </div>
+            </div>
+    <!-- / Content -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wrick17/calendar-plugin@master/theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wrick17/calendar-plugin@master/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wrick17/calendar-plugin@master/calendar.min.js"></script>
+    <script type="text/javascript">
+      let calendar;
+      var configuracion = `
+
+        var defaultConfig = {
+          weekDayLength: 1,
+          prevButton:"",
+          nextButton:"",
+          date: new Date('<%- resumen.fecha -%>'),
+          highlightSelectedWeek:false,
+          showYearDropdown: true,
+          startOnMonday: false,
+          disable: function (date) { 
+            return true
+          },
+          formatDate:new Date().toLocaleDateString('en-us', { year:"numeric", month:"numeric", day:"numeric"},"/"),
+        };
+        
+        calendar = $('#calendar-detalle').calendar(defaultConfig);
+      `;
+      eval(configuracion);
+      function click_mis_datos(){
+        if(document.querySelector('#form_datos').classList.contains('active')){
+          document.querySelector('#form_datos').classList.remove('active');
+          document.querySelector('#form_mis_datos').classList.add('active');
+        }else{
+          document.querySelector('#form_datos').classList.add('active');
+          document.querySelector('#form_mis_datos').classList.remove('active');
+        
+        }
+      }
+    </script>
+
 <%- include("./partials/footer") %>

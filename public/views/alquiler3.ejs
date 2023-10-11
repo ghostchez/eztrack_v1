@@ -41,8 +41,9 @@
                         <select
                           class="form-control"
                           id="cantidadVueltas"
-                          name="cantidadVueltas">
-                        <option>Elegir cantidad de vueltas</option>
+                          name="cantidadVueltas"
+                          required>
+                        <option value="">Elegir cantidad de vueltas</option>
                         <% for( let index = 1; index < 61; index++ ) { %>
                           
                           <option value="<%- index %>"> <%- index %></option>
@@ -68,22 +69,22 @@
                           <label class="form-check-label" for="analisisTelemetria"> Análisis de telemetría </label>
                         </div>
                         <div class="form-check ms-3">
-                          <input class="form-check-input" type="checkbox" value="1" name="seguroMedico" id="seguroMedico">
-                          <label class="form-check-label" for="seguroMedico"> Seguro premium </label>
+                          <input class="form-check-input" type="checkbox" value="1" name="seguroPremium" id="seguroPremium">
+                          <label class="form-check-label" for="seguroPremium"> Seguro premium </label>
                         </div>
                       </div>
                       <div class="mb-3 col-md-6">
                         <label class="form-label">Personalizar compuesto de neumáticos </label>
                         <div class="form-check mt-3 ms-3">
-                          <input name="compuestoNeumaticos" class="form-check-input" type="radio" value="blando" id="blando">
+                          <input name="compuestoNeumaticos" required class="form-check-input" type="radio" value="blando" id="blando">
                           <label class="form-check-label" for="blando"> Blando </label>
                         </div>
                         <div class="form-check ms-3">
-                          <input name="compuestoNeumaticos" class="form-check-input" type="radio" value="medio" id="medio">
+                          <input name="compuestoNeumaticos" required class="form-check-input" type="radio" value="medio" id="medio">
                           <label class="form-check-label" for="medio"> Medio </label>
                         </div>
                         <div class="form-check ms-3">
-                          <input name="compuestoNeumaticos" class="form-check-input" type="radio" value="duro" id="duro">
+                          <input name="compuestoNeumaticos" required class="form-check-input" type="radio" value="duro" id="duro">
                           <label class="form-check-label" for="duro"> Duro </label>
                         </div>
                       </div>
