@@ -46,9 +46,9 @@ let usuariosController = {
                 return false;
             }
             let usuario_actual = await usuarios.findOne({where:{id:sess.idUser},include:[{model:datos_pagos,as:"datos_pago"}]});
-            let {address,province,dni,email,cardOwner,cardNumber,cvv,expireMonth,expireYear} = req.body;
+            let {address,province,dni,email,bankOwner,bank} = req.body;
             if(usuario_actual.datos_pago == null){
-                let result = await datos_pagos.create({direccion:address,estado:province,dni:dni,email,titular:cardOwner,numero_tarjeta:cardNumber,cvv,vencimiento:expireMonth+"/"+expireYear});
+                let result = await datos_pagos.create({direccion:address,estado:province,dni:dni,email,titular:bankOwner,banco:bank});
                 if(result){
                     let usuario_editado = await usuarios.update({idDatosPago:result.id},{where:{id:sess.idUser}});
                     if(usuario_editado){
@@ -60,7 +60,7 @@ let usuariosController = {
     
                 }
             }else{
-                let result = await datos_pagos.update({direccion:address,estado:province,dni:dni,email,titular:cardOwner,numero_tarjeta:cardNumber,cvv,vencimiento:expireMonth+"/"+expireYear},{where:{id:usuario_actual.datos_pago.dataValues.id}});
+                let result = await datos_pagos.update({direccion:address,estado:province,dni:dni,email,titular:bankOwner,banco:bank},{where:{id:usuario_actual.datos_pago.dataValues.id}});
                 if(result){
                     res.redirect("/usuarios/datos_pago?status=edit_success");
                 }else{

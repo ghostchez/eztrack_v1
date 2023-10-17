@@ -129,13 +129,13 @@
                         </div>
                       </div>
                       
-                      <div class="mb-3 col-md-4">
-                        <label for="cardOwner" class="form-label">Titular</label>
+                      <div class="mb-3 col-md-6">
+                        <label for="bankOwner" class="form-label">Titular de la cuenta</label>
                         <input
                           class="form-control validate"
                           type="text"
-                          id="cardOwner"
-                          name="cardOwner"
+                          id="bankOwner"
+                          name="bankOwner"
                           value="<%- (mis_datos_pago)? mis_datos_pago.titular : "" %>"
                           data-validation-type="text"
                           data-validation-length="1_30"
@@ -145,72 +145,20 @@
                           Titular debe ser un texto con maximo 30 caracteres.
                         </div>
                       </div>
-                      <div class="mb-3 col-md-3">
-                        <label for="cardNumber" class="form-label">Numero de tarjeta</label>
-                        <input
-                          class="form-control validate"
-                          type="number"
-                          id="cardNumber"
-                          name="cardNumber"
-                          value="<%- (mis_datos_pago)? mis_datos_pago.numero_tarjeta : "" %>"
-                          data-validation-type="number"
-                          data-validation-length="16_19"
-                          placeholder="504512345678"
-                        />
-                        <div class="error-validacion">
-                          Numero de la tarjeta solo admite entero entre 16 y 19 caracteres.
-                        </div>
-                      </div>
-                      <div class="mb-3 col-md-2">
-                        <label for="cvv" class="form-label">CVV</label>
-                        <input
-                          class="form-control validate"
-                          type="password"
-                          id="cvv"
-                          name="cvv"
-                          value="<%- (mis_datos_pago)? mis_datos_pago.cvv : "" %>"
-                          data-validation-type="number"
-                          data-validation-length="3_4"
-                          placeholder="123"
-                        />
-                        <div class="error-validacion">
-                          Ingrese un cvv valido,entero entre 3 y 4 caracteres.
-                        </div>
-                      </div>
-                      <div class="mb-3 col-md-3">
-                        <div class="row">
-                          <label class="form-label">Vencimiento</label>
-                          <div class="col-md-6">
-                            <input
-                              class="form-control validate"
-                              type="number"
-                              id="expireMonth"
-                              name="expireMonth"
-                              value="<%- (mis_datos_pago)? mis_datos_pago.vencimiento.split("/")[0] : "" %>"
-                              data-validation-type="number"
-                              data-validation-length="2_2"
-                              placeholder="01"
-                            />
-                            <div class="error-validacion">
-                              Ingrese un mes valido, ej:09.
-                            </div>
-                          </div>
-                          <div class="col-6">
-                            <input
-                              class="form-control validate"
-                              type="number"
-                              id="expireYear"
-                              name="expireYear"
-                              value="<%- (mis_datos_pago)? mis_datos_pago.vencimiento.split("/")[1] : "" %>"
-                              data-validation-type="number"
-                              data-validation-length="2_2"
-                              placeholder="26"
-                            />
-                            <div class="error-validacion">
-                              Ingrese un año valido, ej:23.
-                            </div>
-                          </div>
-                        </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="bank" class="form-label">Banco</label>
+                        <select name="bank" id="bank" class="form-control" required>
+                          <option value="">Elegir banco</option>
+                          <option  <%- (mis_datos_pago.dataValues.banco == "banco galicia")? "selected" : "" %> value="banco galicia">BANCO GALICIA</option>
+                          <option  <%- (mis_datos_pago.dataValues.banco == "banco de la nacion argentina")? "selected" : "" %> value="banco de la nacion argentina">BANCO DE LA NACION ARGENTINA</option>
+                          <option  <%- (mis_datos_pago.dataValues.banco == "provincia de buenos aires")? "selected" : "" %> value="provincia de buenos aires">BANCO DE LA PROVINCIA DE BUENOS AIRES</option>
+                          <option  <%- (mis_datos_pago.dataValues.banco == "banco supervielle")? "selected" : "" %> value="banco supervielle">BANCO SUPERVIELLE S.A.</option>
+                          <option  <%- (mis_datos_pago.dataValues.banco == "banco patagonia")? "selected" : "" %> value="banco patagonia">BANCO PATAGONIA S.A.</option>
+                          <option  <%- (mis_datos_pago.dataValues.banco == "brubank")? "selected" : "" %> value="brubank">BRUBANK S.A.U.</option>
+                          <option  <%- (mis_datos_pago.dataValues.banco == "banco macro")? "selected" : "" %> value="banco macro">BANCO MACRO S.A.</option>
+                          <option  <%- (mis_datos_pago.dataValues.banco == "banco patagonia")? "selected" : "" %> value="banco patagonia">BANCO PATAGONIA S.A.</option>
+                          <option  <%- (mis_datos_pago.dataValues.banco == "banco hipotecario")? "selected" : "" %> value="banco hipotecario">BANCO HIPOTECARIO S.A.</option>
+                        </select>
                       </div>
                     </div>
                     <div class="mt-2">

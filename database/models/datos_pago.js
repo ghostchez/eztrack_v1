@@ -22,10 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     dni: DataTypes.INTEGER,
     email: DataTypes.STRING,
     titular: DataTypes.STRING,
-    numero_tarjeta: DataTypes.INTEGER,
-    cvv: DataTypes.INTEGER,
-    vencimiento: DataTypes.STRING,
-
+    banco: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'datos_pagos',
