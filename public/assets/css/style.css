@@ -32,7 +32,31 @@ table.table-list .thumbnail {
   background-color: rgba(237, 237, 237, 0.55);
   border-radius: 3px;
 }
+#alquiler2 #calendar-wrapper .special-buttons {
+  display: none;
+}
 
+#alquiler4 #datos_bancarios {
+  display: none;
+  width: 70%;
+  margin: auto;
+}
+#alquiler4 #datos_bancarios .row {
+  padding: 10px 20px;
+  background-color: rgb(246, 246, 246);
+  border-radius: 12px;
+}
+#alquiler4 #datos_bancarios.active {
+  display: block;
+}
+#alquiler4 #form_datos {
+  display: none;
+}
+#alquiler4 #form_datos.active {
+  display: flex;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
 #alquiler4 #form_datos {
   display: none;
 }
@@ -54,12 +78,12 @@ table.table-list .thumbnail {
 #alquiler4 table#evento-detalle th {
   background-color: rgb(215, 215, 215);
   color: rgb(40, 40, 40);
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 #alquiler4 table#evento-detalle td {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   border-bottom-width: 0px;
 }
 #alquiler4 table#opciones-detalle th {

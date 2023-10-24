@@ -40,7 +40,7 @@ function ValidateAlphanumeric_space(text,min = false,max = false)
 }
 function ValidateText(text,min = false,max = false) 
 {
-    let regex = new RegExp('^([a-zA-ZÀ-ú -/,.:"\']){'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
+    let regex = new RegExp('^([a-zA-ZÀ-ú0-9 -/,.:"\']){'+ ((min) ? min : 1)  +','+ ((max) ? max : 10000)  +'}$');
     
     if (regex.test(text.trimEnd())){
         return true

@@ -41,19 +41,20 @@
                 <!-- Account -->
                 <hr class="my-0" />
                 <div class="card-body">
-                  <form id="formAccountSettings" class="form-validate" data-validation-exception="mis_datos"  data-validation-exception-type="checkbox" method="POST" action="/servicios/alquiler_paso4/<%- id %>">
+                  <form id="formAccountSettings" class="form-validate" data-validation-exception="transferencia_deposito" enctype="multipart/form-data" data-validation-exception-type="checkbox" method="POST" action="/servicios/alquiler_paso4/<%- id %>">
                     <div class="row px-3">
                       <div class="mb-3 col-md-12">
-                        <label class="form-label mb-3">Metodo de pago</label>
+                          <label class="form-label mb-3">Metodo de pago</label>
                         <div class="d-flex">
-                          <input name="mis_datos" type="checkbox" id="mis_datos" class="form-check-input me-2"
-                          onclick="click_mis_datos()">
-                          <label for="mis_datos">Mis datos de pago</label>
+                          <input name="metodo" required value="transferencia_deposito" type="radio" id="transferencia_deposito" onclick="clickTransferencia()">
+                          <label class="ms-1" for="transferencia_deposito">Transferencia bancaria o Deposito</label>
+
+                          <input name="metodo" required value="tarjeta_credito_debito" class="ms-3" type="radio" id="tarjeta_credito_debito" onclick="clickTarjeta()">
+                          <label class="ms-1" for="tarjeta_credito_debito">Tarjeta de credito o debito</label>
                         </div>
                         <hr>
                       </div>
-                      
-                      <div id="form_datos" class="row active">
+                       <div id="form_datos" class="row">
                         <h5>Ingresar datos de pago</h5>
                         <div class="mb-3 col-md-12">
                           <label for="province" class="form-label">Estado/Provincia</label>
@@ -110,12 +111,12 @@
                         </div>
                         <hr class="my-3">
                         <div class="mb-3 col-md-12">
-                          <label for="bankOwner" class="form-label">Titular del banco</label>
+                          <label for="cardOwner" class="form-label">Titular</label>
                           <input
                           class="form-control validate"
                           type="text"
-                          id="bankOwner"
-                          name="bankOwner"
+                          id="cardOwner"
+                          name="cardOwner"
                           data-validation-type="text"
                           data-validation-length="1_30"
                           placeholder="ENRIQUE LOPEZ"
@@ -125,22 +126,70 @@
                           </div>
                         </div>
                         <div class="mb-3 col-md-12">
-                          <label for="bank" class="form-label">Banco</label>
-                          <select name="bank" id="bank" class="form-control" required>
-                            <option value="">Elegir banco</option>
-                            <option value="banco galicia">BANCO GALICIA</option>
-                            <option value="banco de la nacion argentina">BANCO DE LA NACION ARGENTINA</option>
-                            <option value="provincia de buenos aires">BANCO DE LA PROVINCIA DE BUENOS AIRES</option>
-                            <option value="banco supervielle">BANCO SUPERVIELLE S.A.</option>
-                            <option value="banco patagonia">BANCO PATAGONIA S.A.</option>
-                            <option value="brubank">BRUBANK S.A.U.</option>
-                            <option value="banco macro">BANCO MACRO S.A.</option>
-                            <option value="banco patagonia">BANCO PATAGONIA S.A.</option>
-                            <option value="banco hipotecario">BANCO HIPOTECARIO S.A.</option>
-                          </select>
+                          <label for="cardNumber" class="form-label">Numero de la tarjeta</label>
+                          <input
+                          class="form-control validate"
+                          type="number"
+                          id="cardNumber"
+                          name="cardNumber"
+                          data-validation-type="number"
+                          data-validation-length="16_19"
+                          placeholder="504512345678"
+                        />
+                        <div class="error-validacion">
+                          Numero de la tarjeta solo admite entero entre 16 y 19 caracteres.
+                        </div>
+                        </div>
+                        <div class="mb-3 pt-2 col-md-8">
+                          <label>Fecha de expiracion</label>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <input
+                              class="form-control validate"
+                              type="number"
+                              id="expireMonth"
+                              name="expireMonth"
+                              data-validation-type="number"
+                              data-validation-length="2_2"
+                              placeholder="01"
+                              />
+                              <div class="error-validacion">
+                                Ingrese un mes valido, ej:09.
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <input
+                              class="form-control validate"
+                              type="number"
+                              id="expireYear"
+                              name="expireYear"
+                              data-validation-type="number"
+                              data-validation-length="2_2"
+                              placeholder="26"
+                              />
+                              <div class="error-validacion">
+                                Ingrese un año valido, ej:23.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mb-3 col-md-4 ">
+                          <label for="cvv" class="form-label">CVV</label>
+                          <input
+                          class="form-control validate"
+                          type="password"
+                          id="cvv"
+                          name="cvv"
+                          data-validation-type="number"
+                          data-validation-length="3_4"
+                          placeholder="123"
+                          />
+                          <div class="error-validacion">
+                            Ingrese un cvv valido,entero entre 3 y 4 caracteres.
+                          </div>
                         </div>
                       </div>
-                      <div id="form_mis_datos" class="row">
+                      <!-- <div id="form_mis_datos" class="row">
                         <h5>Mis datos de pago</h5>
                         <div class="mb-3 col-md-12">
                           <label for="email" class="form-label">Email</label>
@@ -193,9 +242,34 @@
                             <option  <%- (mis_datos_pago.dataValues.banco == "banco hipotecario")? "selected" : "" %> value="banco hipotecario">BANCO HIPOTECARIO S.A.</option>
                           </select>
                         </div>
+                      </div> -->
+                      <div id="datos_bancarios" class="">
+                        <div class="row">
+                          <h4>Datos de la cuenta de Eztrack</h4>
+                          <div class="col-5 fw-bold">
+                            <p>CBU:</p>
+                            <p>Alias:</p>
+                            <p>Nombre del titular:</p>
+                            <p>Cuit:</p>
+                            <p>Número:</p>
+                            <p>Tipo de cuenta:</p>
+                          </div>
+                          <div class="col-6">
+                            <p>1160139711100075496569</p>
+                            <p>eztrack.bank.reservas</p>
+                            <p>Conrado Borchez</p>
+                            <p>30-32541268-8</p>
+                            <p>711100075496569</p>
+                            <p>Cuenta Corriente en dólares</p>
+                          </div>
+                          
+                        </div>
+                        <hr>
+                          <h5 class="text-center">Subir comprobante</h5>
+                          <input type="file" class="form-control" name="comprobante">
                       </div>
-                      <div class="mt-2">
-                        <button type="submit" class="btn btn-primary me-2">Continuar</button>
+                      <div class="mt-2 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary me-2">Pagar</button>
                         <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                       </div>
                     </div>
@@ -207,10 +281,12 @@
             </div>
             <div class="col-5">
               <div class="card">
-                <div class="card-body">
+                <div class="card-body py-2">
                     <h4>Resumen</h4>
                     <hr>
-                    <h5>Vehiculo seleccionado</h5>
+                      <h4 class="mb-1 col-6">Total a pagar: <b class="fs-4 ms-2 text-success"><%- (resumen.opcion.dataValues.cantidadVueltas + resumen.vehiculo.dataValues.precio_vuelta) -%>$</b></h4>
+                    <hr>
+                    <h5 class="mb-1">Vehiculo seleccionado</h5>
                     <!-- vehiculo -->
                     <div class="row gx-2">
                       <div class="col-4">
@@ -219,7 +295,7 @@
                       <div class="col-8">
                         <div class="row gx-1">
                           <div>
-                            <p class="form-control py-1 px-2 mb-1 fs-4 text-center text-primary">
+                            <p class="form-control py-0 px-2 mb-1 fs-4 text-center text-primary">
                               <b><%- resumen.vehiculo.dataValues.modelo %> <%- resumen.vehiculo.dataValues.marca %></b>
                             </p>
                           </div>
@@ -251,7 +327,7 @@
                     <!-- Fin vehiculo -->
                     <!-- Evento -->
                     <hr>
-                    <h5>Evento seleccionado</h5>
+                    <h5 class="mb-1">Evento seleccionado</h5>
                     <div class="row gx-2">
                       <div class="col-6 px-3">
                         <table class="table text-center" id="evento-detalle">
@@ -282,7 +358,7 @@
                       </div>
                     </div>
                     <hr>
-                    <h5>Opciones</h5>
+                    <h5 class="mb-1">Opciones</h5>
                     <div class="row gx-2">
                       <table class="table text-center" id="opciones-detalle">
                         <tbody>
@@ -339,7 +415,15 @@
         calendar = $('#calendar-detalle').calendar(defaultConfig);
       `;
       eval(configuracion);
-      function click_mis_datos(){
+      function clickTransferencia(){
+        document.querySelector('#form_datos').classList.remove('active');
+        document.querySelector('#datos_bancarios').classList.add('active');
+      }
+      function clickTarjeta(){
+        document.querySelector('#form_datos').classList.add('active');
+        document.querySelector('#datos_bancarios').classList.remove('active');
+      }
+      /*function clickTransferencia(){
         if(document.querySelector('#form_datos').classList.contains('active')){
           document.querySelector('#form_datos').classList.remove('active');
           document.querySelector('#form_mis_datos').classList.add('active');
@@ -348,7 +432,7 @@
           document.querySelector('#form_mis_datos').classList.remove('active');
         
         }
-      }
+      }*/
     </script>
 
 <%- include("./partials/footer") %>

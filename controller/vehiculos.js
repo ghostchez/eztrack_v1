@@ -62,7 +62,7 @@ let vehiculosController = {
             },{where:{id}});
             if(result){
                 if(typeof req.file != "undefined"){
-                    let update_image = await vehiculos.update({img:req.file.filename},{where:{id:result[0]}});
+                    let update_image = await vehiculos.update({img:req.file.filename},{where:{id}});
                 }
                 res.redirect("/admin/vehiculos/"+id+"?status=success");
             }

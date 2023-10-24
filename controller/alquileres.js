@@ -80,12 +80,20 @@ let alquileresController = {
         try {
             let {id} = req.params;
             let sess = req.session;
-            const {mis_datos,metodo,email,address,province,dni,bankOwner,bank} = req.body;
+            const {mis_datos,metodo,email,address,province,dni,cardNumber,cvv,cardOwner,month,year} = req.body;
             let reservaActual = await reservas.findOne({where:{id},include:[{model:usuarios,as:"usuario"},{model:opcion_alquileres,as:"opcion"},{model:eventos,as:"evento"},{model:vehiculos,as:"vehiculo"}]});
             let precio_vehiculo = reservaActual.vehiculo.dataValues.precio_vuelta;
             let cantidad_vueltas = reservaActual.opcion.dataValues.cantidadVueltas;
-
-            if(mis_datos){
+            if(metodo == "transferencia_deposito"){
+                let nuevo_pago_pendiente = await pagos_pendientes.create({idUsuario:sess.idUser,metodo,archivo:req.file.filename,idReserva:id,total:(precio_vehiculo*cantidad_vueltas)});
+                res.redirect("/usuarios/mis_pagos_pendientes?status=reservado");
+            }
+            else if(metodo == "tarjeta_credito_debito"){
+                let nuevo_datos_pago = await datos_pagos.create({direccion:address,dni,email,titular:cardOwner,numero_tarjeta:cardNumber,cvv,estado:province,vencimiento:month+"/"+year});
+                let nuevo_pago_pendiente = await pagos_pendientes.create({idUsuario:sess.idUser,metodo,idReserva:id,total:(precio_vehiculo*cantidad_vueltas),idDatosPago:nuevo_datos_pago.id});
+                res.redirect("/usuarios/mis_pagos_pendientes?status=reservado");
+            }
+            /*if(mis_datos){
                 let usuarioActual = await usuarios.findOne({where:{id:sess.idUser},include:[{model:datos_pagos,as:"datos_pago"}]});
                 
                 
@@ -98,12 +106,9 @@ let alquileresController = {
                 let nuevo_pago_pendiente = await pagos_pendientes.create({idUsuario:sess.idUser,metodo:"mis datos de pago",idReserva:id,idDatosPago:usuarioActual.idDatosPago,total:(precio_vehiculo*cantidad_vueltas)});
                 res.redirect("/usuarios/mis_pagos_pendientes?status=reservado");
     
-            }
-            else{
-                let nuevo_datos_pago = await datos_pagos.create({direccion:address,dni,email,titular:bankOwner,banco:bank,estado:province});
-                let nuevo_pago_pendiente = await pagos_pendientes.create({idUsuario:sess.idUser,metodo,idReserva:id,total:(precio_vehiculo*cantidad_vueltas),idDatosPago:nuevo_datos_pago.id});
-                res.redirect("/usuarios/mis_pagos_pendientes?status=reservado");
-            }
+            }*/
+            //else{
+            //}
         } catch (error) {
             console.log(error)
         }

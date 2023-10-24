@@ -4,9 +4,34 @@
             background-color: rgba(237, 237, 237,0.55);
             border-radius: 3px;
         }
+        .special-buttons{
+            display: none;
+        }
     }
 }
 #alquiler4{
+    #datos_bancarios{
+        display: none;
+        width: 70%;
+        margin: auto;
+        .row{
+            padding: 10px 20px;
+            
+            background-color: rgb(246, 246, 246);
+            border-radius: 12px;
+        }
+    }
+    #datos_bancarios.active{
+        display: block;
+    }
+    #form_datos{
+        display: none;
+    }
+    #form_datos.active{
+        display: flex;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
     #form_datos{
         display: none;
     }
@@ -29,12 +54,12 @@
         th{
             background-color: rgb(215, 215, 215);
             color: rgb(40, 40, 40);
-            padding-top: 5px;
-            padding-bottom: 5px;
+            padding-top: 2px;
+            padding-bottom: 2px;
         }
         td{
-            padding-top: 5px;
-            padding-bottom: 5px;
+            padding-top: 2px;
+            padding-bottom: 2px;
             border-bottom-width:0px;
         }
     }

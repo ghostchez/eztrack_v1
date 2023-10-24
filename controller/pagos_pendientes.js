@@ -37,8 +37,6 @@ let pagosPendientesController = {
     enviar_comprobante:async (req, res) => {
         try {
             let pagos_pendientes_enviado = await pagos_pendientes.update({archivo:req.file.filename},{where:{id:req.body.idPagosPendientes}});
-            console.log(req.file.filename)
-            console.log(req.body.idPagosPendientes)
             if(pagos_pendientes_enviado){
                 res.redirect("/usuarios/mis_pagos_pendientes?status=success");
             }else{

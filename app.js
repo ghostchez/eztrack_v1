@@ -159,13 +159,16 @@ app.put("/admin/vehiculos/:id", upload.single("featuredImage"), (req, res,next) 
   if (req.file) next();
   else next();
 });
+app.post("/servicios/alquiler_paso4/:id", upload_comprobante.single("comprobante"), (req, res,next) => {
+  if (req.file) next();
+  else next();
+});
 app.post("/usuarios/enviar_comprobante", upload_comprobante.single("comprobante"), (req, res,next) => {
   if (req.file) next();
   else next();
 });
 app.get('/assets/pagos_comprobantes/:archivo', function(req, res){
   const file = `${__dirname}/public/assets/archivo_comprobante/${req.params.archivo}`;
-  console.log(file);
   res.download(file); // Set disposition and send it.
 });
 

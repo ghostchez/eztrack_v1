@@ -89,14 +89,14 @@
                         <div class="col-6">
                             <h5 class="ms-4">Elegir fecha de alquiler</h5>
                             <div class="calendar-wrapper" id="calendar-wrapper"></div>
-                            <input type="hidden" name="fecha" id="fecha">
+                            <input type="hidden" name="fecha" required id="fecha">
                             <div id="editor"></div>
                         </div>
                         <div class="col-6">
                             <div class="mt-3">
                                 <label for="evento" class="form-label">Elegir Evento</label>
-                                <select class="form-select" name="evento" id="evento" aria-label="Default select example">
-                                  <option selected>Seleccionar..</option>
+                                <select class="form-select" required name="evento" id="evento" aria-label="Default select example">
+                                  <option selected value="">Seleccionar..</option>
                                   <% eventos_lista.forEach(el => { %>
                                     <option data-fecha-desde="<%- el.fecha_desde %>" data-fecha-hasta="<%- el.fecha_hasta %>" value="<%- el.id %>"><%- el.nombre %><%- el.nombre_evento %></option>
                                   <% }) %>
@@ -156,7 +156,7 @@
           onClickDate: selectDate,
           showYearDropdown: true,
           startOnMonday: false,
-          disable: function (date) { 
+          disable: function (date) {
             if(date_desde != null){
               if(new Date(date) < new Date(date_desde) || new Date(date) > new Date(date_hasta)){
                 return true;
@@ -173,7 +173,7 @@
           });
           var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
           document.querySelector("#fecha").value = new Date(calendar.getSelectedDate());
-      }
+        }
       `;
       eval(configuracion);
       let evento = document.querySelector("#evento");
@@ -183,6 +183,7 @@
         let fecha_hasta = opcion_evento.dataset.fechaHasta.split("-");
         date_desde = fecha_desde;
         date_hasta = fecha_hasta;
+        document.querySelector("#fecha").value = new Date(fecha_desde);
         calendar.updateCalendarOptions({date:new Date(fecha_desde)});
       });
     </script>
